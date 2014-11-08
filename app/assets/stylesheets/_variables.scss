@@ -4,6 +4,8 @@
 $siteRed: red;
 $siteBlue: blue;
 $siteLightGrey: #cccccc;
+$siteGrey: #2b2b2b;
+$siteTan: #c6bd77;
 
 $largeMobileBreakpoint: 29.5em; 	// <472px
 $smallTabletBreakpoint: 36.5em; 	// <592px
@@ -23,14 +25,15 @@ $white: rgb(255,255,255); //#ffffff
 
 // Root
 $bodyColor: white;
-$textColor: #333333;
+$textColor: $siteGrey;
 $columnMargin: .5em;
 $gutter: 1em;
 $warningColor: red;
 $textFontSize: 1em;
 
 // Typography
-$baseFont: 'Open Sans', sans-serif;
+$baseFont: abolition, sans-serif;
+$altFont: playfair, serif;
 $baseFontSize: 100%;
 $baselineHeight: 1.35em;
 $baseFontWeight: 300;
@@ -65,7 +68,7 @@ $headingTextShadow: none;
 $codeFont: 'Source Code Pro', monospace;
 
 // Links
-$linkColor: $siteBlue;
+$linkColor: $siteTan;
 $linkHover: darken($linkColor,5%);
 $linkVisited: darken($linkColor,10%);
 $linkFocus: darken($linkColor,15%);
@@ -88,9 +91,9 @@ $textboxMaxWidth: 30em;
 $labelFontSize: 1.125em;
 $labelColor: $textColor;
 
-$buttonBackground: white;
+$buttonBackground: $siteTan;
 //$buttonBackground2: $siteLightGreen; //Uncomment if you want a gradient background on a button. Also uncomment gradient in
-$buttonBorderColor: $textColor;
+$buttonBorderColor: $siteTan;
 $buttonBorderWidth: .25em;
 $buttonBorderStyle: solid;
 $buttonColor: $textColor;
@@ -98,7 +101,7 @@ $buttonOutlineColor: none;
 $buttonFont: $baseFont;
 $buttonFontSize: .875em;
 $buttonFontWeight: 600;
-$buttonPadding: .5em 1.5em;
+$buttonPadding: .5rem 1.5rem;
 
 $buttonAltBackground: $textColor;
 //$buttonAltBackground2: $siteLightGrey;

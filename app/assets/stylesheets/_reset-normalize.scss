@@ -441,7 +441,7 @@ input[type="reset"] {
 	background-color: $buttonBackground;
 	//@include vertical($buttonBackground, $buttonBackground2);
 	//@include rounded(.5em);
-	@include box-shadow(0 .375em .25em rgba(0,0,0,.5));
+	@include box-shadow(none);
 	border: $buttonBorderWidth $buttonBorderStyle $buttonBorderColor;
 	color: $buttonColor;
 	font-family: $buttonFont;
@@ -452,6 +452,8 @@ input[type="reset"] {
 
 	&.alt {
 		background-color: $buttonAltBackground;
+		color: white;
+		border-color: white;
 		//@include vertical($buttonAltBackground, $buttonAltBackground2);
 	}
 
