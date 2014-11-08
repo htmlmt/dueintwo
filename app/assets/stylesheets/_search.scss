@@ -1,0 +1,22 @@
+.search-wrapper {
+    position: relative;
+
+    input[type="search"] {
+        padding: 1em;
+        padding-right: 3rem;
+        background: rgba(255,255,255,.4);
+        border: .25rem solid white;
+        font-size: 1.375em;
+    }
+
+    input[type="submit"] {
+        position: absolute;
+        height: 30px;
+        width: 30px;
+        right: .5rem;
+        top: .5rem;
+        background: transparent url(../images/search-icon_2x.png) no-repeat 50% 50% / 30px 30px;
+        text-indent: 100%;
+        overflow: hidden;
+    }
+}

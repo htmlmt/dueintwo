@@ -1,6 +1,20 @@
+
 <h1>In my house</h1>
 <% if @in_my_house != nil %>
   <% @in_my_house.each do |loan| %>
+
+<!-- if(not signed in) -->
+<section class="hero">
+    <form class="search-wrapper">
+        <input type="search" placeholder="Search Nearby Items" /><input type="submit">Search</a>
+    </form>
+</section>
+
+<!-- end if -->
+
+<h1>Borrowed</h1>
+<% if @borrowed_items != nil %>
+  <% @borrowed_items.each do |loan| %>
     <h1><%= link_to "#{loan.item.name}", loan.item %></h1>
     <div class="item--photo">
         <%= link_to(image_tag("#{loan.item.photo}", :alt => "#{loan.item.name}"), loan.item) %>
