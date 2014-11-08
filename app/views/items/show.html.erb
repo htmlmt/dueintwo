@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Owner:</strong>
+  <%= @item.user.username %>
+</p>
+
+<div class="item--photo">
+    <%= link_to(image_tag("#{@item.user.photo}", :alt => "#{@item.user.username}"), @item.user) %>
+</div>
+
+<p>
+  <strong>Name:</strong>
+  <%= @item.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @item.description %>
+</p>
+
+<div class="item--photo">
+    <%= link_to(image_tag("#{@item.photo}", :alt => "#{@item.name}"), @item) %>
+</div>
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>

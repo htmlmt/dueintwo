@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+.profile {
+  width: 10%;
+}
+
+img {
+  max-width: 100%;
+}
+
+.item {
+  width: 50%;
+}

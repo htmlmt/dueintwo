@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  item_id: 1
+  borrower_id: 1
+  loaner_id: 1
+  approved: false
+  reserved_start: 2014-11-07 22:57:06
+  reserved_end: 2014-11-07 22:57:06
+
+two:
+  item_id: 1
+  borrower_id: 1
+  loaner_id: 1
+  approved: false
+  reserved_start: 2014-11-07 22:57:06
+  reserved_end: 2014-11-07 22:57:06

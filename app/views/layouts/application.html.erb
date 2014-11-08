@@ -7,7 +7,35 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 
+<header>
+  <div class="header">
+      <a href="/">
+          <div class="home">
+              Due in Two
+          </div>
+      </a>
+      <%= form_for search_path, method: :get do |f| %>
+        <p>
+          <%= f.label "search for stuff" %>
+          <%= text_field_tag :q, params[:q] %>
+          <%= submit_tag "go", name: nil %>
+        </p>
+      <% end %>
+      <% if current_user %>
+      <div class="profile">
+        <%= link_to(image_tag("#{current_user.photo}", :alt => "#{current_user.username}"), user_path(current_user.id)) %>
+      </div>
+        <%= link_to "logout", :logout, method: :post, :class => "logout" %>
+      <% else %>
+        <%= link_to "register", new_user_path, :class => "register" %> |
+        <%= link_to "login", :login, :class => "login" %>
+      <% end %>
+  </div>
+</header>
 <%= yield %>
 
 </body>
