@@ -5,8 +5,6 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @items = Item.all
-    @items = @items.splice(current_user.items)
-    binding.pry
     @distances = []
     @items.each do |item|
       a = Geokit::Geocoders::GoogleGeocoder.geocode "#{current_user.address} #{current_user.city} #{current_user.state} #{current_user.zip}"

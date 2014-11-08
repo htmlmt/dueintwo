@@ -1,14 +1,12 @@
-<% if current_user %>
-    <% @community_items.each do |item| %>
-    <div class="item">
-        <h1><%= link_to "#{item.name}", item %></h1>
-        <p><%= item.description %></p>
-        <% a = Geokit::Geocoders::GoogleGeocoder.geocode "#{current_user.address} #{current_user.city} #{current_user.state} #{current_user.zip}" %>
-        <% b = Geokit::Geocoders::GoogleGeocoder.geocode "#{item.user.address} #{item.user.city} #{item.user.state} #{item.user.zip}" %>
-        <%= a.distance_to(b).round(2) %> miles from home
-        <div class="item--photo">
-            <%= link_to(image_tag("#{item.photo}", :alt => "#{item.name}"), item) %>
-        </div>
+<% @community_items.each do |item| %>
+<div class="item">
+    <h1><%= link_to "#{item.name}", item %></h1>
+    <p><%= item.description %></p>
+    <% a = Geokit::Geocoders::GoogleGeocoder.geocode "#{current_user.address} #{current_user.city} #{current_user.state} #{current_user.zip}" %>
+    <% b = Geokit::Geocoders::GoogleGeocoder.geocode "#{item.user.address} #{item.user.city} #{item.user.state} #{item.user.zip}" %>
+    <%= a.distance_to(b).round(2) %> miles from home
+    <div class="item--photo">
+        <%= link_to(image_tag("#{item.photo}", :alt => "#{item.name}"), item) %>
     </div>
-    <% end %>
+</div>
 <% end %>
