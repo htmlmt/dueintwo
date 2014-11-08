@@ -5,7 +5,7 @@
   <%= @item.user.username %>
 </p>
 
-<div class="item--photo">
+<div class="profile">
     <%= link_to(image_tag("#{@item.user.photo}", :alt => "#{@item.user.username}"), @item.user) %>
 </div>
 
@@ -43,10 +43,6 @@
   <div class="field">
     <%= f.label :reserved_start %><br>
     <%= f.datetime_select :reserved_start %>
-  </div>
-  <div class="field">
-    <%= f.label :reserved_end %><br>
-    <%= f.datetime_select :reserved_end %>
   </div>
   <div class="actions">
     <%= f.submit %>

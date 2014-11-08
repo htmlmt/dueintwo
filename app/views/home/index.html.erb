@@ -1,6 +1,6 @@
-<h1>Borrowed</h1>
-<% if @borrowed_items != nil %>
-  <% @borrowed_items.each do |loan| %>
+<h1>In my house</h1>
+<% if @in_my_house != nil %>
+  <% @in_my_house.each do |loan| %>
     <h1><%= link_to "#{loan.item.name}", loan.item %></h1>
     <div class="item--photo">
         <%= link_to(image_tag("#{loan.item.photo}", :alt => "#{loan.item.name}"), loan.item) %>
@@ -9,11 +9,10 @@
 <% else %>
 <p>No items borrowed</p>
 <% end %>
-<h1>Loaned</h1>
 
-<% if @loaned_items != nil %>
-<% binding.pry %>
-  <% @loaned_items.each do |loan| %>
+<h1>In their house</h1>
+<% if @in_their_house != nil %>
+  <% @in_their_house.each do |loan| %>
     <h1><%= link_to "#{loan.item.name}", loan.item %></h1>
     <div class="item--photo">
         <%= link_to(image_tag("#{loan.item.photo}", :alt => "#{loan.item.name}"), loan.item) %>
@@ -22,6 +21,16 @@
 <% else %>
 <p>No items loaned</p>
 <% end %>
+
+<h1>On my porch</h1>
+<% @on_my_porch.each do |item| %>
+  <h1><%= link_to "#{item.name}", item %></h1>
+  <div class="item--photo">
+      <%= link_to(image_tag("#{item.photo}", :alt => "#{item.name}"), item) %>
+  </div>
+<% end %>
+
+<h1>Community feed</h1>
 <% @community_items.each do |item| %>
 <div class="item">
     <h1><%= link_to "#{item.name}", item %></h1>

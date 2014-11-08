@@ -25,9 +25,10 @@ class LoansController < ApplicationController
   # POST /loans.json
   def create
     @loan = Loan.new(loan_params)
-
+    
     respond_to do |format|
       if @loan.save
+        @loan.update(reserved_end: @loan.reserved_start + 2.days)
         format.html { redirect_to @loan, notice: 'Loan was successfully created.' }
         format.json { render :show, status: :created, location: @loan }
       else

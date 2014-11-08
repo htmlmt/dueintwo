@@ -15,9 +15,11 @@
     <%= f.label :item_id %><br>
     <%= f.collection_select :item_id, Item.all, :id, :name %>
   </div>
+  <%= f.hidden_field :borrower_id, :value => current_user.id%>
+  <%= f.hidden_field :loaner_id, :value => current_user.id%>
   <div class="field">
-    <%= f.label :borrower_id %><br>
-    <%= f.collection_select :borrower_id, User.all, :id, :username %>
+    <%= f.label :loaner_id %><br>
+    <%= f.collection_select :loaner_id, User.all, :id, :username %>
   </div>
   <div class="field">
     <%= f.label :loaner_id %><br>
@@ -31,10 +33,7 @@
     <%= f.label :reserved_start %><br>
     <%= f.datetime_select :reserved_start %>
   </div>
-  <div class="field">
-    <%= f.label :reserved_end %><br>
-    <%= f.datetime_select :reserved_end %>
-  </div>
+  <%= f.hidden_field :reserved_end, :value => :reserved_start + 2.days %>
   <div class="actions">
     <%= f.submit %>
   </div>
