@@ -3,11 +3,11 @@ Rails.application.routes.draw do
   post 'logout' => 'user_sessions#destroy', :as => :logout
   
   resources :user_sessions
-
+  
   resources :loans
-
+  
   resources :items
-
+  
   resources :users
   
   root to: "home#index", :as => :home

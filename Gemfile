@@ -38,9 +38,6 @@ gem 'geokit'
 
 gem 'pry'
 
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

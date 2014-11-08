@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
   def index
-    @items = Item.all
-    @community_items = @items
+    @borrowed_items = Loan.where(borrower_id: current_user.id, approved: true)
+    @loaned_items = Loan.where(loaner_id: current_user.id, approved: true)
+    @community_items = Item.all
     @distances = []
     @community_items.each do |item|
       a = Geokit::Geocoders::GoogleGeocoder.geocode "#{current_user.address} #{current_user.city} #{current_user.state} #{current_user.zip}"

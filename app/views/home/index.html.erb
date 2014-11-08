@@ -1,3 +1,27 @@
+<h1>Borrowed</h1>
+<% if @borrowed_items != nil %>
+  <% @borrowed_items.each do |loan| %>
+    <h1><%= link_to "#{loan.item.name}", loan.item %></h1>
+    <div class="item--photo">
+        <%= link_to(image_tag("#{loan.item.photo}", :alt => "#{loan.item.name}"), loan.item) %>
+    </div>
+  <% end %>
+<% else %>
+<p>No items borrowed</p>
+<% end %>
+<h1>Loaned</h1>
+
+<% if @loaned_items != nil %>
+<% binding.pry %>
+  <% @loaned_items.each do |loan| %>
+    <h1><%= link_to "#{loan.item.name}", loan.item %></h1>
+    <div class="item--photo">
+        <%= link_to(image_tag("#{loan.item.photo}", :alt => "#{loan.item.name}"), loan.item) %>
+    </div>
+  <% end %>
+<% else %>
+<p>No items loaned</p>
+<% end %>
 <% @community_items.each do |item| %>
 <div class="item">
     <h1><%= link_to "#{item.name}", item %></h1>

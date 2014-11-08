@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :item_id %><br>
-    <%= f.number_field :item_id %>
+    <%= f.collection_select :item_id, Item.all, :id, :name %>
   </div>
   <div class="field">
     <%= f.label :borrower_id %><br>
-    <%= f.number_field :borrower_id %>
+    <%= f.collection_select :borrower_id, User.all, :id, :username %>
   </div>
   <div class="field">
     <%= f.label :loaner_id %><br>
