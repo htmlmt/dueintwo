@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bcef4853-b4c9-49c5-a9e2-24918ad6ac65" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.css.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.css.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/items/search.html.erb" afterPath="$PROJECT_DIR$/app/views/items/search.html.erb" />
     </list>
     <ignored path="dueintwo.iws" />
@@ -27,21 +26,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="application.css.scss" pinned="false" current-in-tab="true">
+      <file leaf-file-name="application.css.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5007924" vertical-offset="9899" max-vertical-offset="11295">
+            <state vertical-scroll-proportion="-13.166667" vertical-offset="9899" max-vertical-offset="11295">
               <caret line="681" column="21" selection-start-line="681" selection-start-column="21" selection-end-line="681" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="search.html.erb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="search.html.erb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/items/search.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="1320">
-              <caret line="29" column="107" selection-start-line="29" selection-start-column="107" selection-end-line="29" selection-end-column="107" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1350">
+              <caret line="0" column="33" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -714,18 +713,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/items/search.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="1320">
-          <caret line="29" column="107" selection-start-line="29" selection-start-column="107" selection-end-line="29" selection-end-column="107" />
+        <state vertical-scroll-proportion="-13.166667" vertical-offset="9899" max-vertical-offset="11295">
+          <caret line="681" column="21" selection-start-line="681" selection-start-column="21" selection-end-line="681" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css.scss">
+    <entry file="file://$PROJECT_DIR$/app/views/items/search.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5007924" vertical-offset="9899" max-vertical-offset="11295">
-          <caret line="681" column="21" selection-start-line="681" selection-start-column="21" selection-end-line="681" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1350">
+          <caret line="0" column="33" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
           <folding />
         </state>
       </provider>
