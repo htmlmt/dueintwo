@@ -1,57 +1,68 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Owner:</strong>
-  <%= @item.user.username %>
-</p>
-
-<div class="profile">
-    <%= link_to(image_tag("#{@item.user.photo}", :alt => "#{@item.user.username}"), @item.user) %>
-</div>
-
-<p>
-  <strong>Name:</strong>
+<div class="item--page--title">
   <%= @item.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @item.description %>
-</p>
-
-<div class="item--photo">
-    <%= link_to(image_tag("#{@item.photo}", :alt => "#{@item.name}"), @item) %>
 </div>
 
-<% a = Geokit::Geocoders::GoogleGeocoder.geocode "#{current_user.address} #{current_user.city} #{current_user.state} #{current_user.zip}" %>
-<% b = Geokit::Geocoders::GoogleGeocoder.geocode "#{@item.user.address} #{@item.user.city} #{@item.user.state} #{@item.user.zip}" %>
-<%= a.distance_to(b).round(2) %> miles from home
+<div class="item--page--left--side">
 
-<%= form_for(@loan) do |f| %>
-  <% if @loan.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@loan.errors.count, "error") %> prohibited this loan from being saved:</h2>
+  <div class="item--page--photo">
+      <%= image_tag("#{@item.photo}", :alt => "#{@item.name}") %>
+  </div>
 
-      <ul>
-      <% @loan.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+  <div class="user--info item--page">
+      <a href="<% @item.user %>">
+      <div class="square">
+          <div class="pic" style="background: url(<%= @item.user.photo %>); background-size: 100%">
+          
+          </div>
+        </div>
+      </a>
+
+      <div class="username" id="username"><%= link_to "#{@item.user.username}", @item.user %></div>
+      <div class="items--number">
+        <% if @item.user.items.count == 1 %>
+          1 ITEM
+        <% else %>
+          <%= @item.user.items.count %> ITEMS</div>
+        <% end %>
+  </div>
+
+</div>
+
+<div class="item--description">
+    <%= @item.description %>
+</div>
+
+<div class="item--page--right--side">
+  <div class="pinpoint">
+  </div>
+  <% a = Geokit::Geocoders::GoogleGeocoder.geocode "#{current_user.address} #{current_user.city} #{current_user.state} #{current_user.zip}" %>
+  <% b = Geokit::Geocoders::GoogleGeocoder.geocode "#{@item.user.address} #{@item.user.city} #{@item.user.state} #{@item.user.zip}" %>
+  <%= a.distance_to(b).round(2) %> miles away
+  <div class="loan--request">
+      <%= form_for(@loan) do |f| %>
+        <% if @loan.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@loan.errors.count, "error") %> prohibited this loan from being saved:</h2>
+
+            <ul>
+            <% @loan.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <%= f.hidden_field :item_id, :value => @item.id %>
+        <%= f.hidden_field :borrower_id, :value => current_user.id%>
+        <%= f.hidden_field :loaner_id, :value => current_user.id%>
+        <div class="field">
+          <%= f.label "BORROW ON" %><br>
+          <%= f.datetime_select :reserved_start %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Borrow This" %>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <%= f.hidden_field :loaner_id, :value => @item.user.id%>
-  <%= f.hidden_field :borrower_id, :value => current_user.id%>
-  <%= f.hidden_field :item_id, :value => @item.id%>
-
-  <div class="field">
-    <%= f.label :reserved_start %><br>
-    <%= f.datetime_select :reserved_start %>
+      
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+</div>
