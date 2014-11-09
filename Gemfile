@@ -38,6 +38,8 @@ gem 'geokit'
 
 gem 'pry'
 
+gem 'bootstrap-datepicker-rails'
+
 group :production do
   gem 'rails_12factor'
 end

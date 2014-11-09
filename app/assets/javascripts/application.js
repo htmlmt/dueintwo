@@ -27,3 +27,24 @@ $(document).ready(function(){
 	})
 
 })
+
+// function responsiveElements() {
+//     var windowWidth = window.innerWidth;
+//
+//       var fontSize = windowWidth/75;
+//       var html = document.querySelector("html");
+//       html.style.fontSize = '' + fontSize + 'px';
+// }
+//
+// var resize;
+// window.onresize = function(){
+//     clearTimeout(resize);
+//     resize = setTimeout(responsiveElements(), 100);
+// };
+//
+// window.onload = setupDom;
+// window.onfocus = setupDom;
+//
+// function setupDom() {
+//   responsiveElements()
+// }

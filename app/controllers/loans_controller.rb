@@ -40,7 +40,7 @@ class LoansController < ApplicationController
     respond_to do |format|
       if @loan.save
         @loan.update(reserved_end: @loan.reserved_start + 2.days)
-        format.html { redirect_to @loan, notice: 'Your request to borrow has been sent. Please wait for the owner to approve or deny your rental.' }
+        format.html { redirect_to "/loans", notice: 'Your request to borrow has been sent. Please wait for the owner to approve or deny your rental.' }
         format.json { render :show, status: :created, location: @loan }
       else
         format.html { render :new }

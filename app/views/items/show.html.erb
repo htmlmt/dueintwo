@@ -33,12 +33,17 @@
 </div>
 
 <div class="item--page--right--side">
-  <div class="pinpoint">
+  <div class="pinpoint--container">
+      <div class="pinpoint">
+        <%= image_tag("pinpoint.png") %>
+      </div>
+      <% a = Geokit::Geocoders::GoogleGeocoder.geocode "#{current_user.address} #{current_user.city} #{current_user.state} #{current_user.zip}" %>
+      <% b = Geokit::Geocoders::GoogleGeocoder.geocode "#{@item.user.address} #{@item.user.city} #{@item.user.state} #{@item.user.zip}" %>
+      <div class="distance--away">
+        <%= a.distance_to(b).round(2) %> miles away
+      </div>
   </div>
-  <% a = Geokit::Geocoders::GoogleGeocoder.geocode "#{current_user.address} #{current_user.city} #{current_user.state} #{current_user.zip}" %>
-  <% b = Geokit::Geocoders::GoogleGeocoder.geocode "#{@item.user.address} #{@item.user.city} #{@item.user.state} #{@item.user.zip}" %>
-  <%= a.distance_to(b).round(2) %> miles away
-  <div class="loan--request">
+  <div class="loan--request item--page">
       <%= form_for(@loan) do |f| %>
         <% if @loan.errors.any? %>
           <div id="error_explanation">
@@ -53,14 +58,14 @@
         <% end %>
 
         <%= f.hidden_field :item_id, :value => @item.id %>
-        <%= f.hidden_field :borrower_id, :value => current_user.id%>
-        <%= f.hidden_field :loaner_id, :value => current_user.id%>
+        <%= f.hidden_field :borrower_id, :value => current_user.id %>
+        <%= f.hidden_field :loaner_id, :value => @item.user.id %>
         <div class="field">
           <%= f.label "BORROW ON" %><br>
-          <%= f.datetime_select :reserved_start %>
+          <%= f.datetime_select :reserved_start, :html => {:"data-provide" => 'datepicker'} %>
         </div>
         <div class="actions">
-          <%= f.submit "Borrow This" %>
+          <%= f.submit "Borrow This", :id => "borrow--this" %>
         </div>
       <% end %>
       

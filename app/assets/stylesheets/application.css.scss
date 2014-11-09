@@ -32,7 +32,7 @@
 .hero {
     height: 350px;
     width: 100%;
-    background: url('https://s3.amazonaws.com/lemonly-product/3108399560_e3cdfbccf9_o.jpg') no-repeat 50% 50% / cover;
+    background: url('https://s3.amazonaws.com/lemonly-product/due-in-two-landing-image.jpg') no-repeat 50% 50% / cover;
 }
 
 .hero h1 {
@@ -140,20 +140,20 @@ body{
   width: 90%;
 }
 
-//::-webkit-input-placeholder { /* WebKit browsers */
-//    color:    #2b2b2b;
-//}
-//:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-//   color:    #2b2b2b;
-//   opacity:  1;
-//}
-//::-moz-placeholder { /* Mozilla Firefox 19+ */
-//   color:    #2b2b2b;
-//   opacity:  1;
-//}
-//:-ms-input-placeholder { /* Internet Explorer 10+ */
-//   color:    #2b2b2b;
-//}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #2b2b2b;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #2b2b2b;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #2b2b2b;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color:    #2b2b2b;
+}
 
 #home_search {
   border-left: 1px solid white;
@@ -292,15 +292,26 @@ body{
   font-family: "Open Sans";
 }
 
-.item--page--right--side {
-  width: 30%;
-  position: fixed;
-  top: 49%;
-  right: 0;
+.item--page--title {
+  padding-right: 39%;
 }
 
 .item--page--right--side {
   background: white;
+  border: 1px solid #2b2b2b;
+  width: 30%;
+  position: fixed;
+  top: 25%;
+  right: 3%;
+}
+
+.pinpoint--container {
+  padding: 4%;
+}
+
+.loan--approval h1 {
+  font-family: "Playfair Italic";
+  text-transform: uppercase;
 }
 
 .user--info.item--page {
@@ -315,10 +326,29 @@ body{
   margin: 1%;
 }
 
+.distance--away {
+  font-family: "Playfair Italic";
+  text-transform: uppercase;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.3em;
+}
+
 .item--description {
   margin-top: 4%;
   padding: 2%;
   font-size: 1.2em;
+}
+
+#borrow--this {
+  border: none;
+  background: #c6bd77;
+  font-family: "abolition";
+  font-size: 2em;
+  padding: 2% 13%;
+  width: 83%;
+  margin: 5% auto;
+  display: block;
 }
 
 .user--info.index {
@@ -482,6 +512,8 @@ img {
   font-family: "abolition";
   color: white;
   text-align: center;
+  margin: 2% auto;
+  padding-top: 2%;
 }
 
 .item {
@@ -536,9 +568,31 @@ img {
   padding-top: 2%;
 }
 
+.pinpoint {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4%;
+}
+
 .social {
   float: right;
   padding: 1%;
+}
+
+select, input[type="color" i][list] {
+border: 1px solid #2b2b2b;
+border-radius: 0px;
+background: white;
+}
+
+.loan--request.item--page {
+  border-top: 1px solid #2b2b2b;
+  padding: 5%;
+}
+
+.loan--request.item--page .field {
+  font-family: "Open Sans";
+  text-transform: uppercase;
 }
 
 .facebook, .twitter, .instagram, .pinterest {
