@@ -556,3 +556,112 @@ footer {
   background: white;
   @include clearfix();
 }
+
+
+.results-list {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 1em;
+  list-style: none;
+}
+
+    .result {
+      margin: 0;
+      margin-bottom: 1em;
+      padding: 0;
+      border: 2px solid $siteGrey;
+    }
+
+        .item--graphic {
+          border-bottom: 2px solid $siteGrey;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        .item--content {
+          @include clearfix();
+
+          h1 {
+            font-family: 'abolition';
+            padding: 1rem;
+            padding-bottom: 0;
+            font-size: 2.25rem;
+            line-height: 1.2;
+            margin: 0;
+          }
+
+          .item--description {
+            padding: 1em;
+            padding-top: 0;
+            padding-bottom: 4rem;
+            border-bottom: 2px solid $siteGrey;
+          }
+
+          .square {
+            width: 60px;
+            height: 60px;
+            border: 2px solid $siteGrey;
+            margin-top: -33px;
+
+            .pic {
+              height: 100px;
+              width: 100px;
+              margin-left: -14px;
+            }
+          }
+        }
+
+        .item--renter {
+          border-bottom: 2px solid $siteGrey;
+          padding-bottom: 1.5em;
+        }
+
+        .item--renter--name {
+          display: inline-block;
+          font-family: "Playfair Italic";
+          text-transform: uppercase;
+          margin: 10px 0 0 -20px;
+          font-size: 1.125rem;
+        }
+
+        .item--price,
+        .item--distance {
+          float: left;
+          width: calc(50% - (1em + 1px));
+          padding: .5rem;
+          img {
+            vertical-align: middle;
+            height: 37px;
+          }
+
+          .amount {
+            font-family: "Playfair Italic";
+            font-size: 1.125rem;
+            text-transform: uppercase;
+            vertical-align: middle;
+          }
+        }
+
+        .item--price {
+          border-right: 1px solid $siteGrey;
+        }
+
+        .item--distance {
+          border-left: 1px solid $siteGrey;
+        }
+
+        .item--details_link {
+          clear: both;
+          border-top: 2px solid $siteGrey;
+          background: $siteTan;
+          a {
+            display: block;
+            font-family: abolition;
+            font-size: 1.5rem;
+            padding: 1rem;
+            color: $siteGrey;
+            background: url(/assets/icon-details.png) no-repeat right 50% / auto 24px;
+          }
+        }
