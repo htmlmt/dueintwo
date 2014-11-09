@@ -1,11 +1,15 @@
-<div class="loan--approval">
+<a href="/last">
+<%= image_tag("screen.png") %>
+</a>
+
+<!-- <div class="loan--approval">
 
 <p id="notice"><%= notice %></p>
 
 <h1>Loan approval</h1>
 
 <% @loans.each do |loan| %>
-  <%= User.find(loan.borrower_id).username %>'s rental of your <%= loan.item.name %> 
+  <%= User.find(loan.borrower_id).username %>'s rental of your <%= loan.item.name %>
   <% if loan.approved == true %>
     is approved.
     <h3>Pickup time</h3>
@@ -28,7 +32,7 @@
 <h1>Rental approval</h1>
 
 <% @rentals.each do |loan| %>
-  Your rental of <%= User.find(loan.loaner_id).username %>'s <%= loan.item.name %> 
+  Your rental of <%= User.find(loan.loaner_id).username %>'s <%= loan.item.name %>
   <% if loan.approved == true %>
     is approved.
     <h3>Pickup time</h3>
@@ -47,4 +51,4 @@
   <% end %>
 <% end %>
 
-</div>
+</div> -->

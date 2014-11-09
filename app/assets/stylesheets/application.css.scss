@@ -613,7 +613,6 @@ footer {
 
 
 .results-list {
-  max-width: 300px;
   margin: 0 auto;
   padding: 1em;
   list-style: none;
@@ -624,6 +623,9 @@ footer {
       margin-bottom: 1em;
       padding: 0;
       border: 2px solid $siteGrey;
+      float: left;
+      width: 31%;
+      margin: 0 1%;
     }
 
         .item--graphic {

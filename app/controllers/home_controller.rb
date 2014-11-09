@@ -1,4 +1,7 @@
 class HomeController < ApplicationController
+  def last
+  end
+  
   def index
     if current_user
       @in_my_house = Loan.where(borrower_id: current_user.id, approved: true)
