@@ -558,6 +558,14 @@ footer {
   @include clearfix();
 }
 
+.search-results--title {
+  color: #6d6d6d;
+  font-family: "Playfair Italic";
+  font-size: 2.25rem;
+  text-transform: uppercase;
+  padding: 0 1rem;
+  text-align: center;
+}
 
 .results-list {
   max-width: 300px;
