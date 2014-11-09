@@ -1,6 +1,37 @@
 <h1>Editing loan</h1>
 
-<%= render 'form' %>
+<%= form_for(@loan) do |f| %>
+  <% if @loan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@loan.errors.count, "error") %> prohibited this loan from being saved:</h2>
+
+      <ul>
+      <% @loan.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :reserved_start %><br>
+    <%= f.datetime_select :reserved_start %>
+  </div>
+  <% if current_user.id == @loan.loaner_id %>
+  <div class="field">
+    <%= f.label :approved %><br>
+    <%= f.check_box :approved %>
+  </div>
+  <% end %>
+  <div class="actions">
+    <% if current_user.id == @loan.loaner_id %>
+    <%= f.submit "Update" %>
+    <% else %>
+    <%= f.submit "Update pickup time" %>
+    <% end %>
+  </div>
+<% end %>
+
 
 <%= link_to 'Show', @loan %> |
 <%= link_to 'Back', loans_path %>

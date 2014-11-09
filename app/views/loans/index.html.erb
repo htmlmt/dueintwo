@@ -1,35 +1,44 @@
-<h1>Listing loans</h1>
+<h1>Loan approval</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Borrower</th>
-      <th>Loaner</th>
-      <th>Approved</th>
-      <th>Reserved start</th>
-      <th>Reserved end</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @loans.each do |loan| %>
+  <%= User.find(loan.borrower_id).username %>'s rental of your <%= loan.item.name %> 
+  <% if loan.approved == true %>
+    is approved.
+    <h3>Pickup time</h3>
+    <%= loan.reserved_start.strftime("%B %d at %I:%M %p") %>
+    <h3>Dropoff day</h3>
+    <%= loan.reserved_end.strftime("%B %d") %>
+  <% elsif loan.approved == false %>
+    was denied.
+  <% else %>
+    is pending.
+    <h3>Their proposed pickup time</h3>
+    <%= loan.reserved_start.strftime("%B %d at %I:%M %p") %>
+    <%= link_to 'Edit', edit_loan_path(loan) %>
+    <%= link_to 'Approve', "/loans/#{loan.id}/approve" %>
+    <h3>Dropoff day</h3>
+    <%= loan.reserved_end.strftime("%B %d") %>
+  <% end %>
+<% end %>
 
-  <tbody>
-    <% @loans.each do |loan| %>
-      <tr>
-        <td><%= loan.item_id %></td>
-        <td><%= loan.borrower_id %></td>
-        <td><%= loan.loaner_id %></td>
-        <td><%= loan.approved %></td>
-        <td><%= loan.reserved_start %></td>
-        <td><%= loan.reserved_end %></td>
-        <td><%= link_to 'Show', loan %></td>
-        <td><%= link_to 'Edit', edit_loan_path(loan) %></td>
-        <td><%= link_to 'Destroy', loan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<h1>Rental approval</h1>
 
-<br>
-
-<%= link_to 'New Loan', new_loan_path %>
+<% @rentals.each do |loan| %>
+  Your rental of <%= User.find(loan.loaner_id).username %>'s <%= loan.item.name %> 
+  <% if loan.approved == true %>
+    is approved.
+    <h3>Pickup time</h3>
+    <%= loan.reserved_start.strftime("%B %d at %I:%M %p") %>
+    <h3>Dropoff day</h3>
+    <%= loan.reserved_end.strftime("%B %d") %>
+  <% elsif loan.approved == false %>
+    was denied.
+  <% else %>
+    is pending.
+    <h3>Your proposed pickup time</h3>
+    <%= loan.reserved_start.strftime("%B %d at %I:%M %p") %>
+    <%= link_to 'Edit pickup time', edit_loan_path(loan) %>
+    <h3>Dropoff day</h3>
+    <%= loan.reserved_end.strftime("%B %d") %>
+  <% end %>
+<% end %>

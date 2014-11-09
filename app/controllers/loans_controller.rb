@@ -1,10 +1,11 @@
 class LoansController < ApplicationController
-  before_action :set_loan, only: [:show, :edit, :update, :destroy]
+  before_action :set_loan, only: [:show, :edit, :approve, :update, :destroy]
 
   # GET /loans
   # GET /loans.json
   def index
-    @loans = Loan.all
+    @loans = Loan.where(loaner_id: current_user.id)
+    @rentals = Loan.where(borrower_id: current_user.id)
   end
 
   # GET /loans/1
@@ -20,6 +21,16 @@ class LoansController < ApplicationController
   # GET /loans/1/edit
   def edit
   end
+  
+  def approve
+    if @loan.update(approved: true)
+      format.html { redirect_to "/loans", notice: 'Loan was successfully updated.' }
+      format.json { render :show, status: :ok, location: @loan }
+    else
+      format.html { render :edit }
+      format.json { render json: @loan.errors, status: :unprocessable_entity }
+    end
+  end
 
   # POST /loans
   # POST /loans.json
@@ -29,7 +40,7 @@ class LoansController < ApplicationController
     respond_to do |format|
       if @loan.save
         @loan.update(reserved_end: @loan.reserved_start + 2.days)
-        format.html { redirect_to @loan, notice: 'Loan was successfully created.' }
+        format.html { redirect_to @loan, notice: 'Your request to borrow has been sent. Please wait for the owner to approve or deny your rental.' }
         format.json { render :show, status: :created, location: @loan }
       else
         format.html { render :new }
@@ -42,7 +53,7 @@ class LoansController < ApplicationController
   # PATCH/PUT /loans/1.json
   def update
     respond_to do |format|
-      if @loan.update(loan_params)
+      if @loan.update(loan_params) && @loan.update(reserved_end: @loan.reserved_start + 2.days)
         format.html { redirect_to @loan, notice: 'Loan was successfully updated.' }
         format.json { render :show, status: :ok, location: @loan }
       else

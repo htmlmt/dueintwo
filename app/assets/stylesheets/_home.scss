@@ -1,8 +1,8 @@
 .hero {
-    @include flexbox();
-    @include flexbox-align-items(center);
-    @include flexbox-justify-content(space-around);
+//    @include flexbox();
+//    @include flexbox-align-items(center);
+//    @include flexbox-justify-content(space-around);
     height: 350px;
     width: 100%;
-    background: url(../img/hero.jpg) no-repeat 50% 50% / cover;
+    background: url('https://s3.amazonaws.com/lemonly-product/3108399560_e3cdfbccf9_o.jpg') no-repeat 50% 50% / cover;
 }

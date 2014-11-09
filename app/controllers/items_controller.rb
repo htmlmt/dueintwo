@@ -12,6 +12,10 @@ class ItemsController < ApplicationController
       @distances << a.distance_to(b)
     end
   end
+  
+  def search
+    
+  end
 
   # GET /items/1
   # GET /items/1.json
@@ -34,7 +38,7 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
 
     respond_to do |format|
-      if @item.save
+      if @item.save && User.find(current_user.id).items << @item
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
         format.json { render :show, status: :created, location: @item }
       else
