@@ -17,6 +17,51 @@
 @import "home";
 @import "search";
 
+@font-face {
+    font-family: 'abolition';
+    src: url('abolition-regular-webfont.eot');
+    src: url('abolition-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('abolition-regular-webfont.woff2') format('woff2'),
+    url('abolition-regular-webfont.woff') format('woff'),
+    url('abolition-regular-webfont.ttf') format('truetype'),
+    url('abolition-regular-webfont.svg#abolitionregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'steelfish';
+    src: url('steelfish_eb-webfont.eot');
+    src: url('steelfish_eb-webfont.eot?#iefix') format('embedded-opentype'),
+    url('steelfish_eb-webfont.woff') format('woff'),
+    url('steelfish_eb-webfont.ttf') format('truetype'),
+    url('steelfish_eb-webfont.svg#steelfish_eb') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Playfair Italic';
+    src: url('playfairdisplay-italic-webfont.eot');
+    src: url('playfairdisplay-italic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('playfairdisplay-italic-webfont.woff') format('woff'),
+    url('playfairdisplay-italic-webfont.ttf') format('truetype'),
+    url('playfairdisplay-italic-webfont.svg#playfairdisplay-italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('opensans-condlight-webfont.eot');
+    src: url('opensans-condlight-webfont.eot?#iefix') format('embedded-opentype'),
+    url('opensans-condlight-webfont.woff') format('woff'),
+    url('opensans-condlight-webfont.ttf') format('truetype'),
+    url('opensans-condlight-webfont.svg#opensans-condlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 @mixin clearfix() {
 	*zoom: 1;
 	&:before,
