@@ -17,51 +17,6 @@
 @import "home";
 @import "search";
 
-@font-face {
-    font-family: 'abolition';
-    src: url('abolition-regular-webfont.eot');
-    src: url('abolition-regular-webfont.eot?#iefix') format('embedded-opentype'),
-    url('abolition-regular-webfont.woff2') format('woff2'),
-    url('abolition-regular-webfont.woff') format('woff'),
-    url('abolition-regular-webfont.ttf') format('truetype'),
-    url('abolition-regular-webfont.svg#abolitionregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'steelfish';
-    src: url('steelfish_eb-webfont.eot');
-    src: url('steelfish_eb-webfont.eot?#iefix') format('embedded-opentype'),
-    url('steelfish_eb-webfont.woff') format('woff'),
-    url('steelfish_eb-webfont.ttf') format('truetype'),
-    url('steelfish_eb-webfont.svg#steelfish_eb') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Playfair Italic';
-    src: url('playfairdisplay-italic-webfont.eot');
-    src: url('playfairdisplay-italic-webfont.eot?#iefix') format('embedded-opentype'),
-    url('playfairdisplay-italic-webfont.woff') format('woff'),
-    url('playfairdisplay-italic-webfont.ttf') format('truetype'),
-    url('playfairdisplay-italic-webfont.svg#playfairdisplay-italic') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Open Sans';
-    src: url('opensans-condlight-webfont.eot');
-    src: url('opensans-condlight-webfont.eot?#iefix') format('embedded-opentype'),
-    url('opensans-condlight-webfont.woff') format('woff'),
-    url('opensans-condlight-webfont.ttf') format('truetype'),
-    url('opensans-condlight-webfont.svg#opensans-condlight') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
 @mixin clearfix() {
 	*zoom: 1;
 	&:before,
@@ -194,24 +149,24 @@ body{
 #q {
   border: none;
   font-family: "Playfair Italic";
-  font-size: 3em;
+  font-size: 2em;
   width: 90%;
 }
 
-::-webkit-input-placeholder { /* WebKit browsers */
-    color:    #2b2b2b;
-}
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #2b2b2b;
-   opacity:  1;
-}
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #2b2b2b;
-   opacity:  1;
-}
-:-ms-input-placeholder { /* Internet Explorer 10+ */
-   color:    #2b2b2b;
-}
+//::-webkit-input-placeholder { /* WebKit browsers */
+//    color:    #2b2b2b;
+//}
+//:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+//   color:    #2b2b2b;
+//   opacity:  1;
+//}
+//::-moz-placeholder { /* Mozilla Firefox 19+ */
+//   color:    #2b2b2b;
+//   opacity:  1;
+//}
+//:-ms-input-placeholder { /* Internet Explorer 10+ */
+//   color:    #2b2b2b;
+//}
 
 #home_search {
   border-left: 1px solid white;
@@ -236,7 +191,8 @@ body{
   padding: 1.2% 2%;
   background-repeat: no-repeat;
   transform: translateY(-15px);
-  margin-left: 5%;
+  margin-left: 2%;
+  background-size: 100%;
 }
 
 .search--home input[type="submit"] {
@@ -253,7 +209,7 @@ body{
 }
 
 .header--right {
-  width: 90%;
+  width: 83%;
   display: inline-block;
 }
 
@@ -290,6 +246,16 @@ body{
 
 .edit {
   width: 103%;
+  padding: 19% 0;
+}
+
+.calendar {
+  padding: 20% 0;
+}
+
+.trash {
+  width: 24.3%;
+  padding-top: 1.2%;
 }
 
 .item--photo img {
@@ -304,7 +270,7 @@ body{
 }
 
 .top--buttons {
-  width: 26%;
+  width: 24.3%;
   border-right: 3px solid #2b2b2b;
   border-bottom: 3px solid #2b2b2b;
   border-top: 3px solid #2b2b2b;
@@ -430,7 +396,6 @@ body{
 }
 
 .trash {
-  width: 26%;
   border-right: 3px solid #2b2b2b;
   border-bottom: 3px solid #2b2b2b;
   float: left;
@@ -536,8 +501,8 @@ img {
 }
 
 .square {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   margin: 25px;
   -ms-transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
@@ -550,8 +515,8 @@ img {
 }
 
 .pic {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   margin: -25px;
   -ms-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
@@ -591,7 +556,7 @@ img {
   text-transform: uppercase;
   float: left;
   vertical-align: middle;
-  font-size: 1.3em;
+  font-size: .7em;
 }
 
 .item--name a {
@@ -682,7 +647,7 @@ footer {
       padding: 0;
       border: 2px solid $siteGrey;
       float: left;
-      width: 31%;
+      width: 30%;
       margin: 0 1%;
     }
 
@@ -737,13 +702,13 @@ footer {
           font-family: "Playfair Italic";
           text-transform: uppercase;
           margin: 10px 0 0 -20px;
-          font-size: 1.125rem;
+          font-size: 0.8rem;
         }
 
         .item--price,
         .item--distance {
           float: left;
-          width: calc(50% - (1em + 1px));
+          width: 100%;
           padding: .5rem;
           img {
             vertical-align: middle;
@@ -756,14 +721,6 @@ footer {
             text-transform: uppercase;
             vertical-align: middle;
           }
-        }
-
-        .item--price {
-          border-right: 1px solid $siteGrey;
-        }
-
-        .item--distance {
-          border-left: 1px solid $siteGrey;
         }
 
         .item--details_link {
