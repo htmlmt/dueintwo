@@ -154,20 +154,20 @@ body{
   width: 90%;
 }
 
-//::-webkit-input-placeholder { /* WebKit browsers */
-//    color:    #2b2b2b;
-//}
-//:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-//   color:    #2b2b2b;
-//   opacity:  1;
-//}
-//::-moz-placeholder { /* Mozilla Firefox 19+ */
-//   color:    #2b2b2b;
-//   opacity:  1;
-//}
-//:-ms-input-placeholder { /* Internet Explorer 10+ */
-//   color:    #2b2b2b;
-//}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #2b2b2b;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #2b2b2b;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #2b2b2b;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color:    #2b2b2b;
+}
 
 #home_search {
   border-left: 1px solid white;
@@ -211,7 +211,7 @@ body{
 
 .header--right {
   width: 83%;
-  display: inline-block;
+  display: none;
 }
 
 .tab-link{
@@ -826,6 +826,6 @@ footer {
   }
 }
 
-.login, .signup {
+#login, .signup {
   display: none;
 }
