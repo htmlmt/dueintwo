@@ -11,12 +11,5 @@
  * file per style scope.
  *
  *= require_self
+ *= require main
  */
-
-@import "variables.css.scss";
-@import "reset-normalize.css.scss";
-@import "charges.css.scss";
-@import "fonts.css.scss";
-@import "header.css.scss";
-@import "search.css.scss";
-@import "home.css.scss";

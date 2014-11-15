@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   
   resources :users
   
+  resources :charges
+  
   get 'loans/:id/approve' => "loans#approve"
   
   root to: "home#index", :as => :home
