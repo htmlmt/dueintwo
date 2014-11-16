@@ -1,0 +1,94 @@
+@media only screen and (max-width: 1000px) {
+  header {
+    padding: 1.5% 0;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  header {
+    padding: 15px 0;
+  }
+}
+
+header {
+  background: $siteBlack;
+  @include clearfix();
+}
+
+.header--container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.header--right {
+  width: 78.2%;
+  display: inline-block;
+  vertical-align: middle;
+  @include clearfix();
+}
+
+// Remove before launch
+
+.header--right {
+  display: none;
+}
+
+//
+
+.login--signup {
+  width: 43.0985915%;
+  float: right;
+  padding: 0 2%;
+	@include flexbox();
+	@include flexbox-justify-content(space-between);
+	@include flexbox-align-items(flex-start);
+	@include flexbox-flex-wrap(wrap);
+}
+
+.login--signup .login, .login--signup .signup {
+  @include css3-calc('width', '50% - .3em');
+  display: inline-block;
+  vertical-align: middle;
+  font-family: "Abolition Regular";
+  font-size: 1.7em;
+  padding: 0 1%;
+  text-align: center;
+  letter-spacing: 0.15em;
+}
+
+.login {
+  background: $siteGold;
+  border: 3px solid $siteGold;
+  color: $siteBlack;
+}
+
+.signup, .logout {
+  background: $siteBlack;
+  border: 3px solid $siteGrey;
+  color: $siteGrey;
+}
+
+.signup a, .logout a {
+  color: white;
+  text-decoration: none;
+}
+
+.signup a, .logout a, .login--button a {
+  text-decoration: none;
+}
+
+.login a {
+  color: $siteGold;
+  text-decoration: none;
+}
+
+.logo {
+  vertical-align: middle;
+  display: inline-block;
+  width: 21.2%;
+}
+
+.logo img {
+  display: block;
+  margin: 0 auto;
+}

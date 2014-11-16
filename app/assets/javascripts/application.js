@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
 $(document).ready(function(){
 	
 	$('ul.tabs li').click(function(){
@@ -28,23 +29,33 @@ $(document).ready(function(){
 
 })
 
-// function responsiveElements() {
-//     var windowWidth = window.innerWidth;
-//
-//       var fontSize = windowWidth/75;
-//       var html = document.querySelector("html");
-//       html.style.fontSize = '' + fontSize + 'px';
-// }
-//
-// var resize;
-// window.onresize = function(){
-//     clearTimeout(resize);
-//     resize = setTimeout(responsiveElements(), 100);
-// };
-//
-// window.onload = setupDom;
-// window.onfocus = setupDom;
-//
-// function setupDom() {
-//   responsiveElements()
-// }
+function responsiveElements() {
+    var windowWidth = window.innerWidth;
+
+    if (Modernizr.mq('(max-width: 1000px)')) {
+      var fontSize = windowWidth/62.5;
+      var html = document.querySelector("html");
+      html.style.fontSize = '' + fontSize + 'px';
+    } else if (Modernizr.mq('(min-width: 1000px)')) {
+      var fontSize = 16;
+      var html = document.querySelector("html");
+      html.style.fontSize = '' + fontSize + 'px';
+    } else {
+      var fontSize = windowWidth/35;
+      var html = document.querySelector("html");
+      html.style.fontSize = '' + fontSize + 'px';
+    }
+}
+
+var resize;
+window.onresize = function(){
+    clearTimeout(resize);
+    resize = setTimeout(responsiveElements(), 100);
+};
+
+window.onload = setupDom;
+window.onfocus = setupDom;
+
+function setupDom() {
+  responsiveElements()
+}

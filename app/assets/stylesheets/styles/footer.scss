@@ -1,0 +1,30 @@
+.footer--container {
+  max-width: 1000px;
+  margin: 0 auto;
+	@include flexbox();
+	@include flexbox-justify-content(space-between);
+	@include flexbox-align-items(flex-start);
+	@include flexbox-flex-wrap(wrap);
+}
+
+.facebook, .twitter, .instagram, .pinterest {
+  display: inline-block;
+}
+
+.copyright {
+  font-family: "Playfair Italic";
+  font-size: 1.3em;
+  padding: 2.5% 2% 2% 2%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.social {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 1%;
+}
+
+footer {
+  background: white;
+}
