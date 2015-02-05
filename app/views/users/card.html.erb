@@ -1,0 +1,23 @@
+<%= form_for(@user) do |f| %>
+  <%= f.hidden_field :stripe_card_token %>
+  
+  <%= f.hidden_field :email, :value => current_user.email %>
+
+  <div class="field">
+   <%= label_tag :card_number, "Credit Card Number" %>
+   <%= text_field_tag :card_number, nil, name: nil, "data-stripe" => "number" %>
+  </div>
+  <div class="field">
+   <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+   <%= text_field_tag :card_code, nil, name: nil, "data-stripe" => "cvc" %>
+  </div>
+  <div class="field">
+   <%= label_tag :card_month, "Card Expiration" %>
+   <%= text_field_tag :card_month, nil, name: nil, "data-stripe" => "exp-month", class: "input-mini", "placeholder" => "MM" %>
+  <%= text_field_tag :card_year, nil, name: nil, "data-stripe" => "exp-year", class: "input-mini", "placeholder" => "YYYY" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

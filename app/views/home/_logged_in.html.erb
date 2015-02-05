@@ -1,0 +1,204 @@
+<div class="search-wrapper">
+<%= form_tag items_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search], :placeholder => "SEARCH FOR THINGS TO BORROW." %>
+    <%= submit_tag "", :id => "submit", :name => nil %>
+  </p>
+<% end %>
+</div>
+
+<div class="container">
+  
+  <div class="tabs--container">
+  	<ul class="tabs">
+  		<li class="tab-link current" data-tab="tab-1">ON MY PORCH (<%= @on_my_porch.count + @items_pending.count %>)</li>
+      <% if @in_my_house.count != 0 || nil %>
+  		<li class="tab-link" data-tab="tab-2">IN MY HOUSE (<%= @in_my_house.count %>)</li>
+      <% end %>
+      <% if @in_their_house.count != 0 || nil %>
+  		<li class="tab-link" data-tab="tab-3">IN THEIR HOUSE (<%= @in_their_house.count %>)</li>
+      <% end %>
+  	</ul>
+  </div>
+  
+  <section class="tabs-section--container">
+  	<div id="tab-1" class="tab-content current">
+      <% if @on_my_porch != nil || [] %>
+        <h1>Your items ready to loan out</h1>
+        <div class="tab--items">
+        <% if @items_pending != nil || [] %>
+        <% @items_pending.each do |item| %>
+          <div class="tab--item">
+            <%= link_to item_path(item) do %>
+                <div class="item--photo" style="background:url('<%= item.photo %>'); background-size: cover;">
+                </div>
+            <% end %>
+            <div class="bottom--section">
+              <div class="tab--name"><h2><%= link_to "#{item.name}", item %></h2></div>
+              <div class="top--buttons">
+                <div class="edit"><%= link_to(image_tag("icons/edit.png", :alt => "edit"), edit_item_path(item)) %></div>
+                <div class="calendar"><%= link_to(image_tag("icons/calendar.png", :alt => "calendar"), item) %></div>
+              </div>
+            </div>
+            <div class="item--bottom">
+            <div class="price">Loan to <%= link_to((User.find(item.loans.last.borrower_id).first_name), user_path(User.find(item.loans.last.borrower_id).id)) %></a>?</div>
+              <div class="trash"><%= link_to(image_tag("icons/approve.png", :alt => "approve"), "/loans/#{item.loans.last.id}/approve", data: { confirm: 'Are you sure you want to approve this loan?' }) %></div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <% @on_my_porch.each do |item| %>
+            <div class="tab--item">
+                <%= link_to item_path(item) do %>
+                    <div class="item--photo" style="background:url('<%= item.photo %>'); background-size: cover;">
+                    </div>
+                <% end %>
+                <div class="bottom--section">
+                    <div class="tab--name"><h2><%= link_to "#{item.name}", item %></h2></div>
+                    <div class="top--buttons">
+                        <div class="edit"><%= link_to(image_tag("icons/edit.png", :alt => "edit"), edit_item_path(item)) %></div>
+                        <div class="calendar"><%= link_to(image_tag("icons/calendar.png", :alt => "calendar"), item) %></div>
+                    </div>
+                </div>
+                <div class="item--bottom">
+                    <div class="price">$<%= '%.0f' % item.price %></div>
+                    <div class="trash"><%= link_to(image_tag("icons/trash.png", :alt => "trash"), item_path(item), method: :delete, data: { confirm: 'Are you sure you want to delete this?' }) %></div>
+                </div>
+            </div>
+      <% end %>
+      <div class="tab--item">
+            <a href="items/new">
+                <div class="item--photo" style="background:url('assets/new-item_2x.png')">
+                </div>
+            </a>
+            <div class="bottom--section">
+                <div class="tab--name"><h2><a href="items/new">New Item</a></h2></div>
+                <div class="top--buttons">
+                    <div class="edit"><%= image_tag("icons/edit.png", :alt => "edit") %></div>
+                    <div class="calendar"><%= image_tag("icons/calendar.png", :alt => "calendar") %></div>
+                </div>
+            </div>
+            <div class="item--bottom">
+                <div class="price">$0</div>
+                <div class="trash"><%= image_tag("icons/trash.png", :alt => "trash") %></div>
+            </div>
+      </div>
+      <% if (@on_my_porch.count + @items_pending.count) % 3 == 1 || (@on_my_porch.count + @items_pending.count) == 2 %>
+        <div class="tab--item">
+        </div>
+      <% end %>
+      </div>
+      <% end %>
+  	</div>
+  	<div id="tab-2" class="tab-content">
+      <h1>Their items you're borrowing</h1>
+      <div class="tab--items">
+      <% @in_my_house.each do |loan| %>
+        <div class="tab--item">
+          <%= link_to item_path(loan.item) do %>
+              <div class="item--photo" style="background:url('<%= loan.item.photo %>'); background-size: cover;">
+              </div>
+          <% end %>
+          <div class="bottom--section">
+            <div class="tab--name"><h2><%= link_to "#{loan.item.name}", loan.item %></h2></div>
+            <div class="top--buttons">
+              <div class="edit"><%= link_to(image_tag("icons/edit.png", :alt => "edit"), edit_item_path(loan.item)) %></div>
+              <div class="calendar"><%= link_to(image_tag("icons/calendar.png", :alt => "calendar"), loan.item) %></div>
+            </div>
+          </div>
+          <div class="item--bottom">
+          <div class="price">$<%= '%.0f' % loan.item.price %></div>
+            <div class="trash"><%= link_to(image_tag("icons/trash.png", :alt => "trash"), item_path(loan.item), method: :delete, data: { confirm: 'Are you sure you want to delete this?' }) %></div>
+          </div>
+        </div>
+      <% end %>
+      <% if @in_my_house.count == @in_my_house.count % 3 + 1 || 2 %>
+        <div class="tab--item">
+        </div>
+      <% end %>
+      </div>
+  	</div>
+  	<div id="tab-3" class="tab-content">
+      <h1>Your items others are borrowing</h1>
+      <div class="tab--items">
+      <% @in_their_house.each do |loan| %>
+        <div class="tab--item">
+          <%= link_to item_path(loan.item) do %>
+              <div class="item--photo" style="background:url('<%= loan.item.photo %>')">
+              </div>
+          <% end %>
+          <div class="bottom--section">
+            <div class="tab--name"><h2><%= link_to "#{loan.item.name}", loan.item %></h2></div>
+            <div class="top--buttons">
+              <div class="edit"><%= link_to(image_tag("icons/edit.png", :alt => "edit"), edit_item_path(loan.item)) %></div>
+              <div class="calendar"><%= link_to(image_tag("icons/calendar.png", :alt => "calendar"), loan.item) %></div>
+            </div>
+          </div>
+          <div class="item--bottom">
+          <div class="price">$<%= '%.0f' % loan.item.price %></div>
+            <div class="trash"><%= link_to(image_tag("icons/trash.png", :alt => "trash"), item_path(loan.item), method: :delete, data: { confirm: 'Are you sure you want to delete this?' }) %></div>
+          </div>
+        </div>
+      <% end %>
+      </div>
+  	</div>
+  </section>
+</div>
+
+<% if @community_items.count != nil || 0 %>
+<div class="nearby--listings">
+    <div class="home--header">
+      <div class="home--header--left">
+          <div class="home--header--long">
+          </div>
+          <div class="home--header--short">
+          </div>
+      </div>
+      <h2>NEARBY LISTINGS</h2>
+      <div class="home--header--right">
+          <div class="home--header--long">
+          </div>
+          <div class="home--header--short">
+          </div>
+      </div>
+    </div>
+    <div class="items">
+    <% @community_items.each do |item| %>
+          <div class="item">
+             <%= link_to item_path(item) do %>
+                  <div class="item--photo" style="background:url('<%= item.photo %>'); background-size: cover;">
+                  </div>
+             <% end %>
+  
+              <div class="user--info index">
+                  <a href="users/<%= item.user.id %>">
+                      <div class="square">
+                          <div class="pic" style="background: url(<%= item.user.photo %>); background-size: 100%; background-position: center center; background-repeat: no-repeat;">
+                          </div>
+                      </div>
+                  </a>
+  
+                  <div class="username">
+                      <%= link_to "#{item.user.first_name}", item.user %>
+                  </div>
+              </div>
+  
+              <div class="item--name">
+                  <%= link_to "#{item.name}", item %>
+              </div>
+    
+              <%= link_to item_path(item) do %>
+                  <div class="price">
+                      <%= "$#{'%.0f' % item.price}" %>
+                      <%= image_tag("arrow.png", class: "arrow") %>
+                  </div>
+              <% end %>
+          </div>
+      <% end %>
+      <% if @community_items.count % 3 == 1 || @community_items.count == 2 || @community_items.count % 3 == 2 %>
+        <div class="item">
+        </div>
+      <% end %>
+      </div>
+</div>
+<% end %>

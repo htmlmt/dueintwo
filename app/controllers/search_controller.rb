@@ -1,7 +1,12 @@
 class SearchController < ApplicationController
   def search
-    @items = Item.search do
-      fulltext params[:q]
+    if current_user
+      
     end
+    
+    @search = Item.search do
+      fulltext params[:search]
+    end
+    @items = @search.results
   end
 end

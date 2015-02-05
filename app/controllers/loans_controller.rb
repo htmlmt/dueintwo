@@ -23,12 +23,32 @@ class LoansController < ApplicationController
   end
   
   def approve
-    if @loan.update(approved: true)
-      format.html { redirect_to "/loans", notice: 'Loan was successfully updated.' }
-      format.json { render :show, status: :ok, location: @loan }
-    else
-      format.html { render :edit }
-      format.json { render json: @loan.errors, status: :unprocessable_entity }
+    customer_id = @loan.borrower.stripe_customer_token
+
+    Stripe::Charge.create(
+      :amount => @loan.item.price.to_i * 100,
+      :currency => "usd",
+      :customer => customer_id,
+      :description => "Due in Two: <%= @loan.item.name %> borrow from <%= @loan.loaner.username %>"
+    )
+    
+    @owner_profit = (((@loan.item.price.to_i * 100) - 30) * 0.975).round
+
+    Stripe::Transfer.create(
+       :amount => @owner_profit,
+       :currency => "usd",
+       :recipient => @loan.loaner.stripe_recipient_id,
+       :description => "Due in Two: #{@loan.item.name} loan to #{@loan.borrower.username}"
+    )
+    
+    respond_to do |format|  ## Add this
+      if @loan.update(approved: true)
+        format.html { redirect_to "/", notice: 'Loan was successfully updated.' }
+        format.json { render :show, status: :ok, location: @loan }
+      else
+        format.html { redirect_to "/", notice: '#{@loan.errors}' }
+        format.json { render json: @loan.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -38,14 +58,15 @@ class LoansController < ApplicationController
     @loan = Loan.new(loan_params)
     
     respond_to do |format|
-      if @loan.save
+      if @loan.save_with_payment
+        @loan.update(reserved_start: Date.parse(Date.strptime(loan_params[:reserved_start],'%m/%d/%Y').strftime("%Y-%m-%d")) )
         @loan.update(reserved_end: @loan.reserved_start + 2.days)
-        format.html { redirect_to "/loans", notice: 'Your request to borrow has been sent. Please wait for the owner to approve or deny your rental.' }
+        format.html { redirect_to @loan.item }
         format.json { render :show, status: :created, location: @loan }
       else
-        format.html { render :new }
+        format.html { render :new, notice: '#{@loan.errors}' }
         format.json { render json: @loan.errors, status: :unprocessable_entity }
-      end
+      end 
     end
   end
 
@@ -81,6 +102,6 @@ class LoansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def loan_params
-      params.require(:loan).permit(:item_id, :borrower_id, :loaner_id, :approved, :reserved_start, :reserved_end)
+      params.require(:loan).permit(:item_id, :borrower_id, :loaner_id, :approved, :reserved_start, :reserved_end, :stripe_customer_token, :stripe_card_token, :email)
     end
 end

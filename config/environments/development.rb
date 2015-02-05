@@ -6,6 +6,8 @@ Rails.application.configure do
   
   config.action_mailer.default_url_options = { host: 'localhost:5000' }
   
+  Sunspot.config.solr.url = 'http://localhost:8982/solr'
+  
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on

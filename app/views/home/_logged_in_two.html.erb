@@ -1,0 +1,120 @@
+<div class="search-wrapper">
+<%= form_tag items_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search], :placeholder => "SEARCH FOR THINGS TO BORROW." %>
+    <%= submit_tag "", :id => "submit", :name => nil %>
+  </p>
+<% end %>
+</div>
+
+<section class="landing-page">
+    <section class="landing-page--items">
+        <dl class="accordion">
+          <dt class="accordion__title">Your Requests</dt>
+          <dd class="accordion__content">
+            
+          </dd>
+          <dt class="accordion__title">Their Requests</dt>
+          <dd class="accordion__content">
+            
+          </dd>
+          <dt class="accordion__title">Loans</dt>
+          <dd class="accordion__content">
+            
+          </dd>
+          <dt class="accordion__title">Borrows</dt>
+          <dd class="accordion__content">
+            
+          </dd>
+          <dt class="accordion__title">Inventory</dt>
+          <dd class="accordion__content">
+            
+          </dd>
+        </dl>
+    </section>
+    <% if @community_items.count != nil || 0 %>
+    <div class="nearby--listings">
+        <div class="home--header">
+          <div class="home--header--left">
+              <div class="home--header--long">
+              </div>
+              <div class="home--header--short">
+              </div>
+          </div>
+          <h2>NEARBY LISTINGS</h2>
+          <div class="home--header--right">
+              <div class="home--header--long">
+              </div>
+              <div class="home--header--short">
+              </div>
+          </div>
+        </div>
+        <div class="items">
+        <% @community_items.each do |item| %>
+              <div class="item">
+                 <%= link_to item_path(item) do %>
+                      <div class="item--photo" style="background:url('<%= item.photo %>'); background-size: cover;">
+                      </div>
+                 <% end %>
+
+                  <div class="user--info index">
+                      
+                      <%= link_to item.user do %>
+                          <div class="square">
+                              <div class="pic" style="background: url(<%= item.user.photo %>); background-size: 100%; background-position: center center; background-repeat: no-repeat;">
+                              </div>
+                          </div>
+                      <% end %>
+
+                      <div class="username">
+                          <%= link_to "#{item.user.first_name}", item.user %>
+                      </div>
+                  </div>
+
+                  <div class="item--name">
+                      <%= link_to "#{item.name}", item %>
+                  </div>
+
+                  <%= link_to item_path(item) do %>
+                      <div class="price">
+                          <%= "$#{'%.0f' % item.price}" %>
+                          <%= image_tag("arrow.png", class: "arrow") %>
+                      </div>
+                  <% end %>
+              </div>
+          <% end %>
+          <% if @community_items.count % 3 == 1 || @community_items.count == 2 || @community_items.count % 3 == 2 %>
+            <div class="item">
+            </div>
+          <% end %>
+          </div>
+    </div>
+    <% end %>
+</section>
+
+<script>
+if($(window).width() > 768){
+
+// Hide all but first tab content on larger viewports
+$('.accordion__content:not(:first)').hide();
+
+// Activate first tab
+$('.accordion__title:first-child').addClass('active');
+
+} else {
+  
+// Hide all content items on narrow viewports
+$('.accordion__content').hide();
+};
+
+// Wrap a div around content to create a scrolling container which we're going to use on narrow viewports
+$( ".accordion__content" ).wrapInner( "<div class='overflow-scrolling'></div>" );
+
+// The clicking action
+$('.accordion__title').on('click', function() {
+$('.accordion__content').hide();
+$(this).next().show().prev().addClass('active').siblings().removeClass('active');
+});
+
+
+</script>

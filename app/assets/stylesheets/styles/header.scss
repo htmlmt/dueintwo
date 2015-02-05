@@ -2,11 +2,19 @@
   header {
     padding: 1.5% 0;
   }
+  
+  .header--container {
+    padding-right: 2%;
+  }
 }
 
 @media only screen and (min-width: 1000px) {
   header {
     padding: 15px 0;
+  }
+  
+  .header--container {
+    padding-right: 20px;
   }
 }
 
@@ -29,9 +37,9 @@ header {
 
 // Remove before launch
 
-.header--right {
-  display: none;
-}
+//.landing--page {
+//  display: none;
+//}
 
 //
 
@@ -56,6 +64,18 @@ header {
   letter-spacing: 0.15em;
 }
 
+.header--right .logout {
+  width: calc(18% - .3em);
+  display: inline-block;
+  vertical-align: middle;
+  font-family: "Abolition Regular";
+  font-size: 1.7em;
+  padding: 0 1%;
+  text-align: center;
+  color: $siteGrey;
+  letter-spacing: 0.15em;
+}
+
 .login {
   background: $siteGold;
   border: 3px solid $siteGold;
@@ -69,7 +89,7 @@ header {
 }
 
 .signup a, .logout a {
-  color: white;
+  color: $siteGrey;
   text-decoration: none;
 }
 

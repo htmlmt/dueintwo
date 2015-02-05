@@ -1,0 +1,161 @@
+<div class="hero">
+    <div class="content">
+        <h1>THE LIBRARY FOR EVERYTHING</h1>
+        <%= form_tag items_path, :method => :get, :class => "search-wrapper", :id => "new_item" do %>
+          <p class="search--home">
+            <%= text_field_tag :search, params[:search], :id => "home_search", :placeholder => "SEARCH FOR THINGS TO BORROW." %>
+            <%= submit_tag "", :name => nil %>
+          </p>
+        <% end %>
+    </div>
+</div>
+<div class="how--it--works">
+    <div class="content">
+        <div class="home--header">
+          <div class="home--header--left">
+              <div class="home--header--long">
+              </div>
+              <div class="home--header--short">
+              </div>
+          </div>
+          <h2>HOW IT WORKS</h2>
+          <div class="home--header--right">
+              <div class="home--header--long">
+              </div>
+              <div class="home--header--short">
+              </div>
+          </div>
+        </div>
+        <div class="how--it--works--container">
+            <div class="how--it--works--section">
+                <div class="how--it--works--graphic">
+                    <%= image_tag("drill_2x.png", :alt => "drill") %>
+                </div>
+                <div class="how--it--works--text">
+                    <h3>List items<br/> available to rent</h3>
+                </div>
+            </div>
+            <div class="how--it--works--section">
+                <div class="how--it--works--graphic">
+                    <%= image_tag("available-items_2x.png", :alt => "available items") %>
+                </div>
+                <div class="how--it--works--text">
+                    <h3>Find available<br/> items nearby</h3>
+                </div>
+            </div>
+            <div class="how--it--works--section">
+                <div class="how--it--works--graphic">
+                    <%= image_tag("home_2x.png", :alt => "home") %>
+                </div>
+                <div class="how--it--works--text">
+                    <h3>Pick up</h3>
+                </div>
+            </div>
+            <div class="how--it--works--section">
+                <div class="how--it--works--graphic">
+                    <%= image_tag("parachute_2x.png", :alt => "parachute") %>
+                </div>
+                <div class="how--it--works--text">
+                    <h3>Return in two days</h3>
+                </div>
+            </div>
+            <div class="how--it--works--section">
+                <div class="how--it--works--graphic">
+                    <%= image_tag("money_2x.png", :alt => "money") %>
+                </div>
+                <div class="how--it--works--text">
+                    <h3>Make money.<br/> Save money.</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% if @community_items != false %>
+    <div class="nearby--listings">
+        <div class="content">
+        <div class="home--header">
+          <div class="home--header--left">
+              <div class="home--header--long">
+              </div>
+              <div class="home--header--short">
+              </div>
+          </div>
+          <h2>NEARBY LISTINGS</h2>
+          <div class="home--header--right">
+              <div class="home--header--long">
+              </div>
+              <div class="home--header--short">
+              </div>
+          </div>
+        </div>
+        <div class="items">
+        <% @community_items.each do |item| %>
+              <div class="item">
+                  <%= link_to item_path(item) do %>
+                      <div class="item--photo" style="background:url('<%= item.photo %>'); background-size: cover;">
+                      </div>
+                  <% end %>
+
+                  <div class="user--info index">
+                      <%= link_to user_path(item.user) do %>
+                          <div class="square">
+                              <div class="pic" style="background: url(<%= item.user.photo %>); background-size: 100%; background-position: center center; background-repeat: no-repeat;">
+                              </div>
+                          </div>
+                      <% end %>
+
+                      <div class="username">
+                          <%= link_to "#{item.user.first_name}", item.user %>
+                      </div>
+                  </div>
+
+                  <div class="item--name">
+                      <%= link_to "#{item.name}", item %>
+                  </div>
+
+                  <%= link_to item_path(item) do %>
+                      <div class="price">
+                          <%= "$#{'%.0f' % item.price}" %>
+                          <%= image_tag("arrow.png", class: "arrow") %>
+                      </div>
+                  <% end %>
+              </div>
+          <% end %>
+          <% if @community_items.count % 3 == 1 || @community_items.count == 2 || @community_items.count % 3 == 2 %>
+            <div class="item">
+            </div>
+          <% end %>
+          </div>
+      </div>
+    </div>
+<% else %>
+    <div class="nearby--listings">
+        <div class="content">
+            <div class="home--header">
+                <div class="home--header--left">
+                    <div class="home--header--long">
+                    </div>
+                    <div class="home--header--short">
+                    </div>
+                </div>
+                <h2>NEARBY LISTINGS</h2>
+                <div class="home--header--right">
+                    <div class="home--header--long">
+                    </div>
+                    <div class="home--header--short">
+                    </div>
+                </div>
+            </div>
+            <p>Enter your address to see items listed nearby.</p>
+            <%= form_tag "/", :method => :get do %>
+                <p>
+                    <%= text_field_tag :address, params[:address], :placeholder => "address" %>
+                    <%= text_field_tag :city, params[:city], :placeholder => "city" %>
+                    <%= text_field_tag :state, params[:state], :placeholder => "state" %>
+                    <%= text_field_tag :zip, params[:zip], :placeholder => "zip" %>
+                    <%= submit_tag "see listings", :id => "submit", :name => nil %>
+                </p>
+            <% end %>
+        </div>
+    </div>
+<% end %>

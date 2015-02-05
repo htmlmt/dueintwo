@@ -4,14 +4,15 @@
   <title>Due in Two</title>
   <link rel="shortcut icon" href="assets/DueInTwo.png" type="image/x-icon">
   <link rel="icon" href="assets/DueInTwo.png" type="image/x-icon">
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<!-- <p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p> -->
+<div class="notice"><%= notice %></div>
+<div class="alert"><%= alert %></div>
 
 <header>
     <div class="header--container">
@@ -23,12 +24,12 @@
         <% if current_user %>
           <div class="header--right">
               <div class="profile">
-                <h2>WELCOME BACK, <%= link_to "#{current_user.username}", user_path(current_user.id) %></h2>
+                <h2>WELCOME BACK, <%= link_to "#{current_user.first_name}", user_path(current_user) %></h2>
               </div>
               <div class="logout"><%= link_to "logout", :logout, method: :post %></div>
           </div>
         <% else %>
-        <div class="header--right">
+        <div class="header--right landing--page">
             <div class="login--signup">
               <%= link_to "LOGIN", :login, :class => "login" %>
               <%= link_to "SIGN UP", new_user_path, :class => "signup" %>
@@ -38,14 +39,25 @@
     <% end %>
 </header>
 
-<%= yield %>
+<div class="wrapper">
+  <%= yield %>
+</div>
 
 <footer>
     <div class="footer--container">
         <div class="copyright">
-          ©2014 DUE IN TWO
+          ©<span id="current-year">
+          </span>
+          <script type="text/javascript">
+          var date = new Date().getFullYear();
+          $('#current-year').text(date);
+          </script> 
+        <a href="/">DUE IN TWO</a>  |  <a href="/about">ABOUT</a>  
+          <% if current_user %>
+            |  <a href="users/<%= current_user.id %>">MY ACCOUNT</a>
+          <% end %>
         </div>
-        <div class="social">
+        <div class="social" id="footer--social">
           <div class="facebook">
             <a href="http://facebook.com/dueintwo">
               <%= image_tag("social/facebook.png", :alt => "facebook}") %>

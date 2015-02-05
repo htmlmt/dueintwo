@@ -1,3 +1,15 @@
+@media only screen and (max-width: 1000px) {
+  .footer--container {
+    padding-right: 2%;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .footer--container {
+    padding-right: 20px;
+  }
+}
+
 .footer--container {
   max-width: 1000px;
   margin: 0 auto;
@@ -19,10 +31,18 @@
   vertical-align: middle;
 }
 
+.copyright a, .copyright a:visited {
+    color: black;
+}
+
 .social {
   display: inline-block;
   vertical-align: middle;
   padding: 1%;
+}
+
+#footer--social {
+  width: 21%;
 }
 
 footer {

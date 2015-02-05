@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :messages
+
   get 'login' => 'user_sessions#new', :as => :login
   post 'logout' => 'user_sessions#destroy', :as => :logout
   
@@ -14,7 +16,7 @@ Rails.application.routes.draw do
   
   get 'loans/:id/approve' => "loans#approve"
   
-  root to: "home#index", :as => :home
+  root :to => "home#index", :as => :home
   
   get 'search' => "items#search", :as => :search
   

@@ -1,217 +1,70 @@
 @media only screen and (max-width: 1000px) {
-  .hero {
-    padding-bottom: 40%;
+  .container, .nearby--listings {
+    padding: 0 2%;
   }
   
-  .hero h1 {
-    padding-top: 8%;
-  }
-  
-  .items {
-    margin-top: 2%;
-  }
-  
-  .nearby--listings {
-    padding-top: .3%;
-  }
-  
-  .how--it--works .home--header {
-    margin: 20px auto 0 auto;
+  #new_item {
+    margin: 0 2%;
   }
 }
 
 @media only screen and (min-width: 1000px) {
-  .hero {
-    padding-bottom: 400px;
-  }
-  
-  .hero h1 {
-    padding-top: 80px;
-  }
-  
-  .items {
-    margin-top: 20px;
-  }
-  
   .nearby--listings {
-    padding-top: 3px;
+    padding: 0 20px;
   }
   
-  .how--it--works .home--header {
-    margin: 2% auto 0 auto;
+  #new_item {
+    margin: 0 20px;
   }
 }
 
-::selection {
+.notice, .alert {
   background: $siteGold;
-}
-
-::-moz-selection {
-  background: $siteGold;
-}
-
-.hero {
-  height: 0;
-  width: 100%;
-  background: image-url("hero.jpg") no-repeat 50% 50% / cover;
-}
-
-.hero h1 {
-  margin: 0;
-  font-family: "Abolition Regular";
-  color: white;
   text-align: center;
-  font-size: 3em;
-  letter-spacing: 0.15em;
+  font-family: "Open Sans";
+  color: white;
+  text-transform: uppercase;
 }
 
-.home--header {
+.tab-content {
   max-width: 1000px;
   margin: 0 auto;
 }
 
-.home--header h2 {
-  margin: 0;
-  font-family: "Abolition Regular";
-  text-align: center;
-  font-size: 2.2em;
-  letter-spacing: 0.15em;
-  width: 25%;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.home--header--left, .home--header--right {
-  height: 0;
-  padding-bottom: 5%;
-}
-
-.nearby--listings .home--header .home--header--long, .nearby--listings .home--header .home--header--short {
-  border-top: 0.2em solid white;
-}
-
-.nearby--listings .home--header .home--header--left, .nearby--listings .home--header .home--header--right {
-  width: 36%;
-}
-
-.nearby--listings .home--header h2 {
-  width: 27%;
-}
-
-.home--header--right .home--header--long {
-  width: 30%;
-  height: 0;
-  margin-top: 5%;
-  border-top: 0.2em solid $siteBlack;
-}
-
-.home--header--right .home--header--short {
-  width: 20%;
-  height: 0;
-  margin-top: 2.5%;
-  border-top: 0.2em solid $siteBlack;
-}
-
-.home--header--left .home--header--long {
-  margin-left: 70%;
-  height: 0;
-  margin-top: 5%;
-  border-top: 0.2em solid $siteBlack;
-  width: 30%;
-}
-
-.home--header--left .home--header--short {
-  width: 20%;
-  height: 0;
-  margin-top: 2.5%;
-  border-top: 0.2em solid $siteBlack;
-  float: right;
-}
-
-.home--header--left, .home--header--right {
-  width: 37%;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.how--it--works .home--header h2 {
-  color: $siteBlack;
-}
-
-.nearby--listings {
-  background: $siteBlack;
-}
-
-.nearby--listings .home--header h2 {
-  color: white;
-}
-
-.how--it--works--container {
+.items {
 	@include flexbox();
 	@include flexbox-justify-content(space-between);
 	@include flexbox-align-items(flex-start);
 	@include flexbox-flex-wrap(wrap);
-  margin: 0 auto 3% auto;
-  max-width: 1000px;
-}
-
-.how--it--works--section {
-  width: 20%;
-}
-
-.how--it--works--text h3 {
-  font-family: "Abolition Regular";
-  text-align: center;
-  width: 85%;
-  letter-spacing: .1em;
-  margin: 0 auto;
-}
-
-.square {
-  width: 25%;
-  height: 0;
-  padding-bottom: 23%;
-  margin: 10%;
-  -ms-transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  overflow: hidden;
-  margin-top: -15%;
-  border: .3em solid white;
-  float: left;
-  vertical-align: middle;
-}
-
-.pic {
-  width: 175%;
-  height: 0;
-  padding-bottom: 190%;
-  margin-top: -40%;
-  margin-left: -35%;
-  -ms-transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-.tab-content {
-  max-width: 960px;
-}
-
-.items {
-  @include clearfix();
   padding-bottom: 5%;
   max-width: 1000px;
   margin: 0 auto;
+  margin-top: 1.5%;
+}
+
+.item {
+  @include css3-calc('width', '100%/3 - 1em');
+  background: white;
+  margin-bottom: 4%;
 }
 
 .item--name {
   font-family: "Abolition Regular";
   font-size: 1.8em;
+  padding-right: 5%;
+  padding-left: 5%;
+  height: 0;
+  padding-bottom: 22%;
 }
 
 .username {
   font-family: "Playfair Italic";
   font-size: 1.5em;
+}
+
+.username a {
+  color: $siteBlack;
+  text-transform: uppercase;
 }
 
 .price {
@@ -220,15 +73,19 @@
   text-align: center;
   font-size: 1.5em;
   margin: 5% auto 0.5% auto;
-  border-top: .3em solid $siteBlack;
+  border-top: 0.15em solid $siteBlack;
 }
 
-.item {
-  float: left;
+.item--name a {
+  color: $siteBlack;
+}
+
+.price a {
+  color: $siteBlack;
 }
 
 .tabs {
-  margin-left: 4%;
+  margin: 0 auto;
 }
 
 .how--it--works h1 {
@@ -241,6 +98,7 @@
 .profile h2 {
   font-family: "abolition";
   color: white;
+  letter-spacing: .2em;
 }
 
 .profile, .home {
@@ -259,126 +117,118 @@ a {
 }
 
 body {
-      margin: 0;
-    }
+  margin: 0;
+}
     
-    .container {
-      width: 100%;
-      margin: 0 auto;
-    }
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
 
-    ul.tabs {
-      margin-bottom: 0px;
-      margin-right: 0px;
-      margin-top: 0px;
-      padding: 0px;
-      list-style: none;
-    }
+ul.tabs {
+  list-style: none;
+}
 
-    ul.tabs li {
-      background: #c6bd77;
-      color: #222;
-      display: inline-block;
-      padding: 10px 15px;
-      cursor: pointer;
-      border-top: 3px solid #2b2b2b;
-      border-right: 3px solid #2b2b2b;
-      border-left: 3px solid #2b2b2b;
-      margin-bottom: 0%;
-      transform: translateY(5px);
-    }
+ul.tabs li {
+  background: $siteGold;
+  color: $siteBlack;
+  display: inline-block;
+  padding: .8% 3% 1.2% 3%;
+  cursor: pointer;
+  margin-bottom: 0%;
+  letter-spacing: .1em;
+  margin-left: -1%;
+}
 
-    .tab--item {
-      width: 31%;
-      float: left;
-      margin-left: 1%;
-      margin-right: 1%;
-    }
+.tab-content h1 {
+    margin: 0;
+    padding: 3% 0;
+}
 
-    ul.tabs li.current {
-      background: white;
-      border-top: 3px solid #2b2b2b;
-      border-right: 3px solid #2b2b2b;
-      border-left: 3px solid #2b2b2b;
-      border-bottom: 3px solid white;
-      color: #222;
-      margin-bottom: -3px;
-      padding: 15px 15px;
-      transform: translateY(0px);
-    }
+.tab--items {
+	@include flexbox();
+	@include flexbox-justify-content(space-between);
+	@include flexbox-align-items(flex-start);
+	@include flexbox-flex-wrap(wrap);
+}
 
-    .tab-content {
-      display: none;
-      background: white;
-      padding: 15px;
-      border-top: 3px solid #2b2b2b;
-      @include clearfix();
-    }
+.tabs {
+    max-width: 1000px;
+}
 
-    .tab-content.current {
-      display: inherit;
-    }
+.tab--item {
+  @include css3-calc('width', '100%/3 - 1em');
+  margin-bottom: 4%;
+}
+
+ul.tabs li.current {
+  color: $siteBlack;
+  padding: 1.7% 3% 1.3% 3%;
+  letter-spacing: .1em;
+  @include transform-translate(0, 4.5%);
+}
+
+.tabs-section--container {
+    background: $siteGold;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.current {
+  display: inherit;
+}
+
+.search--submit {
+  position: relative;
+}
 
 #q {
   border: none;
   font-family: "Playfair Italic";
-  font-size: 2em;
-  width: 90%;
+  font-size: 2.3em;
+  width: 52.4%;
+  margin: 0 auto;
+  display: block;
 }
 
 ::-webkit-input-placeholder { /* WebKit browsers */
-    color:    #2b2b2b;
+    color:    #6d6d6d;
 }
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #2b2b2b;
+   color:    #6d6d6d;
    opacity:  1;
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #2b2b2b;
+   color:    #6d6d6d;
    opacity:  1;
 }
 :-ms-input-placeholder { /* Internet Explorer 10+ */
-   color:    #2b2b2b;
+   color:    #6d6d6d;
 }
 
-#home_search {
-  border-left: 1px solid white;
-  border-bottom: 1px solid white;
-  border-top: 1px solid white;
-  border-right: none;
-  font-family: "Playfair Italic";
-  font-size: 1.5em;
-  padding: 1.3% 0 1.3% 3%;
-  width: 60%;
-  background: rgba(255, 255, 255, 0.6);
-}
-
-.item--name {
-  padding-left: 5%;
-}
-
-.search--submit input[type="submit"]
-{
-  background: url(search.png);
+.search--submit input[type="submit"] {
+  background: url(icons/search.png);
   border: none;
-  padding: 1.2% 2%;
+  height: 0;
+  padding-bottom: 4%;
   background-repeat: no-repeat;
-  transform: translateY(-15px);
-  margin-left: 2%;
   background-size: 100%;
+  cursor: pointer;
 }
 
 .search--home input[type="submit"] {
-  background: url(search.png) rgba(255, 255, 255, 0.6);
-  border: none;
-  padding: 2.04% 3% 2.9%;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  transform: translateY(-6px);
-  margin-left: -0.5%;
-  border-right: 1px solid white;
-  border-bottom: 1px solid white;
-  border-top: 1px solid white;
+    background: url(icons/search.png);
+    border: none;
+    padding: 4.4% 0 0 6%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    transform: translateY(-50%);
+    position: absolute;
+    top: 50%;
+    right: 1em;
+    cursor: pointer;
 }
 
 .tab-link {
@@ -398,32 +248,42 @@ body {
 }
 
 .tab--name h2 {
-  margin: 0;
-  font-size: 1.9em;
+  margin: 14% 5%;
+  font-size: 1.8em;
 }
 
 .tab--name {
-  border-top: 3px solid #2b2b2b;
-  border-right: 3px solid #2b2b2b;
-  border-left: 3px solid #2b2b2b;
-  border-bottom: 3px solid #2b2b2b;
-  padding: 3.8% 3%;
-  width: 65%;
+  border-top: 3px solid $siteBlack;
+  border-right: 3px solid $siteBlack;
+  border-left: 3px solid $siteBlack;
+  border-bottom: 3px solid $siteBlack;
+  width: 75%;
+  height: 0;
+  vertical-align: middle;
   float: left;
+  padding-bottom: 41%;
 }
 
 .edit {
   width: 103%;
-  padding: 19% 0;
+  height: 0;
+  padding-bottom: 82%;
 }
 
 .calendar {
-  padding: 20% 0;
+  height: 0;
+  padding-bottom: 89%;
 }
 
 .trash {
-  width: 24.3%;
-  padding-top: 1.2%;
+  width: 25%;
+  height: 0;
+  padding-bottom: 17%;
+  padding-top: 1%;
+  padding-right: 1%;
+  border-right: 3px solid $siteBlack;
+  border-bottom: 3px solid $siteBlack;
+  float: left;
 }
 
 .item--photo img {
@@ -437,11 +297,20 @@ body {
   border-bottom: none;
 }
 
+.item--photo {
+  height: 0;
+  padding-bottom: 65%;
+}
+
+.nearby--listings {
+  width: 100%;
+}
+
 .top--buttons {
-  width: 24.3%;
-  border-right: 3px solid #2b2b2b;
-  border-bottom: 3px solid #2b2b2b;
-  border-top: 3px solid #2b2b2b;
+  width: 25%;
+  border-right: 3px solid $siteBlack;
+  border-bottom: 3px solid $siteBlack;
+  border-top: 3px solid $siteBlack;
   float: left;
   padding-right: 0.65%;
 }
@@ -451,9 +320,9 @@ body {
 }
 
 .item--page--photo {
-  width: 60%;
-  margin-left: 1%;
+  width: 67%;
   margin-top: -4%;
+  padding: 0% 2.5% 5.5% 2.5%;
 }
 
 .item--page--photo img {
@@ -461,15 +330,16 @@ body {
 }
 
 .tab-content .price {
-  border-left: 3px solid #2b2b2b;
-  border-right: 3px solid #2b2b2b;
-  border-bottom: 3px solid #2b2b2b;
+  border-left: 3px solid $siteBlack;
+  border-right: 3px solid $siteBlack;
+  border-bottom: 3px solid $siteBlack;
   border-top: none;
   margin: 0;
-  width: 65%;
-  padding: 3%;
+  width: 75%;
   float: left;
-  padding: 2.9% 3%;
+  height: 0;
+  padding-bottom: 14%;
+  padding-top: 4%;
 }
 
 .item--page--title {
@@ -480,10 +350,6 @@ body {
   padding: 2.5% 2.5% 5.5% 2.5%;
 }
 
-.item--description {
-  font-family: "Open Sans";
-}
-
 .item--page--title {
   padding-right: 39%;
 }
@@ -492,9 +358,10 @@ body {
   background: white;
   border: 1px solid #2b2b2b;
   width: 30%;
-  position: fixed;
-  top: 25%;
+  position: absolute;
+  top: 0;
   right: 3%;
+  padding-bottom: 2%;
 }
 
 .pinpoint--container {
@@ -509,13 +376,54 @@ body {
 .user--info.item--page {
   background: #2b2b2b;
   height: 70px;
-  margin-top: 5%;
-  width: 61%;
+  margin-top: 0%;
+  width: 64.6%;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: -webkit-linear-gradient(left, #2b2b2b, #2b2b2b, #2b2b2b); 
+  background-image:    -moz-linear-gradient(left, #2b2b2b, #2b2b2b, #2b2b2b); 
+  background-image:     -ms-linear-gradient(left, #2b2b2b, #2b2b2b, #2b2b2b); 
+  background-image:      -o-linear-gradient(left, #2b2b2b, #2b2b2b, #2b2b2b); 
+  width: 112%;
+  margin-left: -6%;
+}
+
+.field span {
+  font-family: "Abolition Regular";
+  font-size: 1.7em;
+  float: right;
+  margin-right: 1.5em;
+}
+
+.field {
+  @include clearfix();
 }
 
 #username a {
   color: white;
   margin: 1%;
+}
+
+.share--item h4 {
+  text-align: center;
+  font-family: "Open Sans";
+  margin: 0;
+}
+
+
+.social {
+  width: 100%;
+	text-align: center;
+}
+
+.item--page--left--side, .item--page--title {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
 }
 
 .distance--away {
@@ -528,19 +436,47 @@ body {
 
 .item--description {
   margin-top: 4%;
-  padding: 2%;
-  font-size: 1.2em;
+  padding: 2% 0% 6% 2%;
+  font-size: 1.1em;
+  width: 67%;
+  font-family: "Open Sans";
 }
 
-#borrow--this {
+#card_number, #loan_reserved_start {
+  width: 86%;
+}
+
+#card_code {
+  width: 24.8%;
+}
+
+.input-mini {
+  width: 25%;
+}
+
+.field {
+  margin-top: 3.5%;
+}
+
+#search--description {
+  width: 100%;
+  height: 0;
+  padding-bottom: 10%;
+}
+
+.loan--request #stripe-button, #borrow--this {
   border: none;
   background: #c6bd77;
-  font-family: "abolition";
+  font-family: "Abolition Regular";
   font-size: 2em;
   padding: 2% 13%;
-  width: 83%;
+  width: 100%;
   margin: 5% auto;
   display: block;
+}
+
+#new_loan p {
+  font-family: "Open Sans";
 }
 
 .user--info.index {
@@ -551,8 +487,9 @@ body {
   color: white;
   font-family: "abolition";
   font-size: 2em;
-  margin: 1.5%;
+  margin: -2% 5.5% 0% 2%;
   float: right;
+  letter-spacing: .1em;
 }
 
 .user--info.item--page .square {
@@ -563,14 +500,6 @@ body {
   @include clearfix();
 }
 
-.trash {
-  border-right: 3px solid #2b2b2b;
-  border-bottom: 3px solid #2b2b2b;
-  float: left;
-  padding-right: .65%;
-  padding-bottom: 0.9%;
-}
-
 .edit img, .calendar img, .trash img {
   display: block;
   margin: 0 auto;
@@ -578,9 +507,9 @@ body {
 }
 
 #new_item {
-  width: 70%;
+  width: 55%;
+  max-width: 550px;
   margin: 0 auto;
-  margin-left: 24%;
 }
 
 .edit {
@@ -613,32 +542,8 @@ img {
   padding-top: 2%;
 }
 
-.item {
-  width: 31%;
-  background: white;
-  margin: 0 1%;
-}
-
 .item--photo {
   border: .3em solid white;
-}
-
-.username a {
-  font-family: "Playfair Italic";
-  color: #2b2b2b;
-  text-decoration: none;
-  text-transform: uppercase;
-  float: left;
-  vertical-align: middle;
-  font-size: .7em;
-}
-
-.item--name a {
-  font-family: "steelfish";
-  color: #2b2b2b;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 1.8em;
 }
 
 .user--info {
@@ -658,14 +563,21 @@ img {
 }
 
 select, input[type="color" i][list] {
-border: 1px solid #2b2b2b;
-border-radius: 0px;
-background: white;
+  border: 1px solid #2b2b2b;
+  border-radius: 0px;
+  background: white;
+}
+
+.fee {
+  font-family: "Open Sans";
+  position: absolute;
+  bottom: -6%;
+  right: 24%;
 }
 
 .loan--request.item--page {
   border-top: 1px solid #2b2b2b;
-  padding: 5%;
+  padding: 5% 5% 0 5%;
 }
 
 .loan--request.item--page .field {
@@ -680,186 +592,4 @@ background: white;
   text-transform: uppercase;
   padding: 0 1rem;
   text-align: center;
-}
-
-.results-list {
-  margin: 0 auto;
-  padding: 1em;
-  list-style: none;
-}
-
-    .result {
-      margin: 0;
-      margin-bottom: 1em;
-      padding: 0;
-      border: 2px solid $siteGrey;
-      float: left;
-      width: 30%;
-      margin: 0 1%;
-    }
-
-        .item--graphic {
-          border-bottom: 2px solid $siteGrey;
-          background: transparent no-repeat 50% 50% / cover;
-          padding-top: 56.26%;
-        }
-
-        .item--content {
-          @include clearfix();
-
-          h1 {
-            font-family: 'abolition';
-            padding: 1rem;
-            padding-bottom: 0;
-            font-size: 2.25rem;
-            line-height: 1.2;
-            margin: 0;
-          }
-
-          .item--description {
-            padding: 1em;
-            padding-top: 0;
-            padding-bottom: 4rem;
-            border-bottom: 2px solid $siteGrey;
-          }
-
-          .square {
-            width: 60px;
-            height: 60px;
-            border: 2px solid $siteGrey;
-            margin-top: -33px;
-
-            .pic {
-              height: 100px;
-              width: 100px;
-              margin-left: -14px;
-            }
-          }
-        }
-
-        .item--renter {
-          border-bottom: 2px solid $siteGrey;
-          padding-bottom: 1.5em;
-        }
-
-        .item--renter--name {
-          display: inline-block;
-          font-family: "Playfair Italic";
-          text-transform: uppercase;
-          margin: 10px 0 0 -20px;
-          font-size: 0.8rem;
-        }
-
-        .item--price,
-        .item--distance {
-          float: left;
-          width: 100%;
-          padding: .5rem;
-          img {
-            vertical-align: middle;
-            height: 37px;
-          }
-
-          .amount {
-            font-family: "Playfair Italic";
-            font-size: 1.125rem;
-            text-transform: uppercase;
-            vertical-align: middle;
-          }
-        }
-
-        .item--details_link {
-          clear: both;
-          border-top: 2px solid $siteGrey;
-          background: $siteTan;
-          a {
-            display: block;
-            font-family: abolition;
-            font-size: 1.5rem;
-            padding: 1rem;
-            color: $siteGrey;
-            background: url(/assets/icon-details.png) no-repeat right 50% / auto 24px;
-          }
-        }
-
-
-
-@media only screen and (min-width: #{$tabletBreakpoint}) {
-  .results-list {
-    max-width: 960px;
-  }
-
-    .result {
-      display: flex;
-
-    }
-
-    .item--graphic {
-      width: 300px;
-      padding-top: 0;
-      border: 0;
-      border-right: 2px solid $siteGrey;
-    }
-
-    .item--content {
-      width: calc(100% - 300px);
-
-      .item--description {
-        margin-top: 0;
-        padding: 0 1rem 1rem 1rem;
-      }
-    }
-
-  .item--metadata {
-    display: flex;
-    align-items: stretch;
-  }
-
-  .item--price,
-  .item--distance {
-    float: none;
-    width: auto;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    white-space: nowrap;
-  }
-
-  .item--renter {
-    position: relative;
-    border: 0;
-    border-right: 2px solid $siteGrey;
-    padding: 0 2em 0 3em;
-    .square {
-      position: absolute;
-      width: 35px;
-      height: 35px;
-      left: -46px;
-      top: 7px;
-      margin-top: 0;
-      background: $siteGrey;
-
-      .pic {
-        height: 50px;
-        width: 50px;
-        margin-top: -8px;
-        margin-left: -7px;
-      }
-    }
-  }
-
-  .item--renter--name {
-    margin: 0;
-    line-height: 53px;
-  }
-
-  .item--details_link {
-    border-top: 0;
-    border-left: 2px solid $siteGrey;
-    width: 30%;
-
-    a {
-      line-height: 53px;
-      padding: 0 3.5rem 0 1.5rem;
-    }
-  }
 }

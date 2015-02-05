@@ -1,5 +1,118 @@
+
+
 <h1>New item</h1>
 
-<%= render 'form' %>
+<%= form_for(@item) do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :photo %><br>
+    <%= f.text_field :photo %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+  
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  
+  <%= f.hidden_field :stripe_card_token %>
+  
+  <% if current_user.stripe_recipient_id.present? == false %>
+  
+      <h2>Register your card to receive payments:</h2>
+  
+      <%= f.hidden_field :email, :value => current_user.email %>
+      
+      <p>
+        <div class="field">
+         <%= label_tag :card_number, "Credit Card Number" %><br/>
+         <%= text_field_tag :card_number, nil, name: nil, "data-stripe" => "number" %>
+        </div>
+      </p>
+      <p>
+        <div class="field">
+         <%= label_tag :card_code, "Security Code on Card (CVV)" %><br/>
+         <%= text_field_tag :card_code, nil, name: nil, "data-stripe" => "cvc" %>
+        </div>
+      </p>
+      <p>
+        <div class="field">
+         <%= label_tag :card_month, "Card Expiration" %><br/>
+         <%= text_field_tag :card_month, nil, name: nil, "data-stripe" => "exp-month", class: "input-mini", "placeholder" => "MM" %>
+        <%= text_field_tag :card_year, nil, name: nil, "data-stripe" => "exp-year", class: "input-mini", "placeholder" => "YYYY" %>
+        </div>
+      </p>
+      <p>
+        <div class="field">
+           <%= label_tag :tax_id, "Social Security Number" %><br/>
+           <%= text_field_tag :tax_id, nil, name: nil, "data-stripe" => "tax_id" %>
+        </div>
+      </p>
+      
+  <% end %>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 
 <%= link_to 'Back', items_path %>
+
+<% if current_user.stripe_recipient_id.present? == false %>
+      <script>
+      // This identifies your website in the createToken call below
+      Stripe.setPublishableKey('<%= Rails.configuration.stripe[:publishable_key] %>');
+
+      var stripeResponseHandler = function(status, response) {
+        var $form = $('#new_item');
+
+        if (response.error) {
+          // Show the errors on the form
+          $form.find('#stripe_error').text(response.error.message);
+          $form.find('input[type=submit]').prop('disabled', false);
+        } else {
+          // token contains id, last4, and card type
+          var token = response.id;
+    
+          // Insert the token into the form so it gets submitted to the server
+          $form.find($('#item_stripe_card_token').val(token));
+
+          // and re-submit
+          $form.get(0).submit();
+        }
+      };
+
+      jQuery(function($) {
+            $('#new_item').submit(function(e) {
+              var $form = $(this);
+
+              // Disable the submit button to prevent repeated clicks
+              $form.find('input[type=submit]').prop('disabled', true);
+
+              Stripe.createToken($form, stripeResponseHandler);
+
+              // Prevent the form from submitting with the default action
+              return false;
+            });
+          });
+      </script>
+  <% end %>

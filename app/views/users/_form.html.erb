@@ -12,6 +12,14 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
@@ -38,6 +46,10 @@
   <div class="field">
     <%= f.label :zip %><br>
     <%= f.text_field :zip %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br>
+    <%= f.telephone_field :phone %>
   </div>
   <div class="field">
      <%= f.label :password %><br />

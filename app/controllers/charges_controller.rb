@@ -3,22 +3,32 @@ class ChargesController < ApplicationController
   end
 
   def create
-    # Amount in cents
-    @amount = 554
+    @loan = Loan.new(loan_params)
     
     binding.pry
+    
+    # Amount in cents
+    @amount = params[:amount]
+    
+    # get the credit card details submitted by the form or app
+    token = params[:stripeToken]
 
+    # create a Customer
     customer = Stripe::Customer.create(
-      :email => 'example@stripe.com',
-      :card  => params[:stripeToken]
+      :card => token,
+      :description => "",
+      :email => "#{current_user.email} %>"
     )
 
-    charge = Stripe::Charge.create(
-      :customer    => customer.id,
-      :amount      => @amount,
-      :description => 'Rails Stripe customer',
-      :currency    => 'usd'
+    # charge the Customer instead of the card
+    Stripe::Charge.create(
+        :amount => @amount, # in cents
+        :currency => "usd",
+        :customer => customer.id,
+        :capture => false
     )
+    
+    save_stripe_customer_id(current_user, customer.id)
 
   rescue Stripe::CardError => e
     flash[:error] = e.message

@@ -1,86 +1,37 @@
-<ul class="results-list">
-    <li class="result">
-        <section class="item--graphic">
-            <img src="/assets/items/item-dyson.jpg" />
-        </section>
-        <section class="item--content">
-            <h1>Dyson vacuum x-9 series</h1>
-            <section class="item--description">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci...
-            </section>
-            <section class="item--metadata">
-                <section class="item--renter">
-                    <div class="square">
-                        <div class="pic" style="background: url(https://s3.amazonaws.com/lemonly-product/andrewnorman.jpg) no-repeat 50% 50% / 100% auto;"></div>
+<div class="items">
+<% @nearby_items.each do |item| %>
+    <div class="item">
+        <div class="item--photo">
+            <%= link_to(image_tag("#{item.photo}", :alt => "#{item.name}"), item) %>
+        </div>
+
+        <div class="user--info index">
+            <a href="users/<%= item.user.id %>">
+                <div class="square">
+                    <div class="pic" style="background: url(<%= item.user.photo %>); background-size: 100%; background-position: center center; background-repeat: no-repeat;">
                     </div>
-                    <span class="item--renter--name">Andrew</span>
-                </section>
-                <section class="item--price">
-                    <img src="/assets/icon-price.png" /> <span class="amount">$10</span>
-                </section>
-                <section class="item--distance">
-                    <img src="/assets/icon-distance.png" /> <span class="amount">1.8 Miles</span>
-                </section>
-                <section class="item--details_link">
-                    <a href="#">Details</a>
-                </section>
-            </section>
-        </section>
-    </li>
-    <li class="result">
-        <section class="item--graphic">
-            <img src="/assets/items/item-stormtrooper.jpg" />
-        </section>
-        <section class="item--content">
-            <h1>The best vacuum I’ve ever used. Rent it you won’t be sorry</h1>
-            <section class="item--description">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci...
-            </section>
-            <section class="item--metadata">
-                <section class="item--renter">
-                    <div class="square">
-                        <div class="pic" style="background: url(https://pbs.twimg.com/profile_images/509438488433790976/f8s67k03.png) no-repeat 50% 50% / 100% auto;"></div>
-                    </div>
-                    <span class="item--renter--name">Michael</span>
-                </section>
-                <section class="item--price">
-                    <img src="/assets/icon-price.png" /> <span class="amount">$12</span>
-                </section>
-                <section class="item--distance">
-                    <img src="/assets/icon-distance.png" /> <span class="amount">0.5 Miles</span>
-                </section>
-                <section class="item--details_link">
-                    <a href="#">Details</a>
-                </section>
-            </section>
-        </section>
-    </li>
-    <li class="result">
-        <section class="item--graphic">
-            <img src="/assets/items/item-roomba.jpg" />
-        </section>
-        <section class="item--content">
-            <h1>iRobot Prosessional series. Roomba</h1>
-            <section class="item--description">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci...
-            </section>
-            <section class="item--metadata">
-                <section class="item--renter">
-                    <div class="square">
-                        <div class="pic" style="background: url(https://s3.amazonaws.com/lemonly-product/andrewnorman.jpg) no-repeat 50% 50% / 100% auto;"></div>
-                    </div>
-                    <span class="item--renter--name">Andrew</span>
-                </section>
-                <section class="item--price">
-                    <img src="/assets/icon-price.png" /> <span class="amount">$10</span>
-                </section>
-                <section class="item--distance">
-                    <img src="/assets/icon-distance.png" /> <span class="amount">5.0 Miles</span>
-                </section>
-                <section class="item--details_link">
-                    <a href="#">Details</a>
-                </section>
-            </section>
-        </section>
-    </li>
-</ul>
+                </div>
+            </a>
+
+            <div class="username">
+                <%= link_to "#{item.user.username}", item.user %>
+            </div>
+        </div>
+
+        <div class="item--name">
+            <%= link_to "#{item.name}", item %>
+        </div>
+
+        <a href="items/<%= item.id %>">
+            <div class="price">
+                <%= "$#{'%.0f' % item.price}" %>
+                <%= image_tag("arrow.png", class: "arrow") %>
+            </div>
+        </a>
+    </div>
+<% end %>
+<% if @community_items.count % 3 == 1 || @community_items.count == 2 || @community_items.count % 3 == 2 %>
+  <div class="item">
+  </div>
+<% end %>
+</div>

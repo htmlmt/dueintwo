@@ -1,29 +1,43 @@
-<h1>Listing items</h1>
+<div class="search-wrapper">
+<%= form_tag items_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search], :placeholder => "NEARBY \"#{ params[:search].upcase }\" LISTINGS" %>
+    <%= submit_tag "", :id => "submit", :name => nil %>
+  </p>
+<% end %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Photo</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<ul class="results-list">
     <% @items.each do |item| %>
-      <tr>
-        <td><%= item.name %></td>
-        <td><%= item.description %></td>
-        <td><%= item.photo %></td>
-        <td><%= link_to 'Show', item %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <li class="result">
+        <a href="items/<%= item.id %>">
+            <section class="item--graphic"  style="background-image: url(<%= item.photo %>);">
+            
+            </section>
+        </a>
+        <section class="item--content">
+            <h1><%= link_to "#{item.name}", item %></h1>
+            <section class="item--description" id="search--description">
+                <%= item.description %>
+            </section>
+            <section class="item--metadata">
+                <section class="item--renter">
+                    <div class="square">
+                        <a href="users/<%= item.user.id %>"><div class="pic" style="background: url(<%= item.user.photo %>); background-size: 100%; background-position: center center; background-repeat: no-repeat;"></div></a>
+                    </div>
+                    <span class="item--renter--name"><%= link_to "#{item.user.first_name}", item.user %></span>
+                </section>
+                <section class="item--price">
+                    <img src="/assets/icons/icon-price.png" /> <span class="amount"><%= "$#{'%.0f' % item.price}" %></span>
+                </section>
+                <section class="item--distance">
+                    <img src="/assets/icons/icon-distance.png" /> <span class="amount">1.8 Miles</span>
+                </section>
+                <section class="item--details_link">
+                    <%= link_to "Details", item %>
+                </section>
+            </section>
+        </section>
+    </li>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Item', new_item_path %>
+</ul>

@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
 # Use postgresql as the database for Active Record
@@ -18,6 +17,8 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+
+gem 'jquery-turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -28,6 +29,14 @@ gem 'spring',        group: :development
 
 gem 'sassquatch'
 
+group :development do
+  gem 'sunspot_solr'
+end
+
+gem 'progress_bar'
+
+gem 'sunspot_rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -37,6 +46,10 @@ gem 'unicorn'
 gem 'sorcery'
 
 gem 'geokit'
+
+gem 'geocoder'
+
+gem 'friendly_id'
 
 gem 'pry'
 
@@ -54,3 +67,4 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'twilio-ruby'
