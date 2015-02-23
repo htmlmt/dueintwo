@@ -80,17 +80,53 @@ header {
   background: $siteGold;
   border: 3px solid $siteGold;
   color: $siteBlack;
+  transition-duration: .3s;
+}
+
+.login:hover {
+    transition-duration: .3s;
+    background: white;
+    border: 3px solid white;
+}
+
+.login:active {
+    background: $siteGold;
+    border: 3px solid $siteGold;
+    color: $siteBlack;
 }
 
 .signup, .logout {
   background: $siteBlack;
   border: 3px solid $siteGrey;
   color: $siteGrey;
+  transition-duration: .3s;
+  cursor: pointer;
+}
+
+.signup:active, .logout:active {
+    background: $siteBlack;
+    border: 3px solid $siteGrey;
+    color: $siteGrey;
 }
 
 .signup a, .logout a {
   color: $siteGrey;
   text-decoration: none;
+  transition-duration: .3s;
+}
+
+.signup:hover a, .logout:hover a {
+    color: white;
+}
+
+.signup:active a, .logout:active a {
+    color: $siteGrey;
+}
+
+.signup:hover, .logout:hover {
+    border: 3px solid white;
+    color: white;
+    transition-duration: .3s;
 }
 
 .signup a, .logout a, .login--button a {

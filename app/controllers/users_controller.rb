@@ -33,7 +33,14 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to :home, notice: 'User was successfully created.' }
+        auto_login(@user)
+        format.html { 
+          if params[:user][:photo].present?
+            render :crop
+          else
+            redirect_to :home, notice: "Welcome to Due in Two, #{@user.first_name}." 
+          end
+        }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -47,7 +54,13 @@ class UsersController < ApplicationController
   def update    
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { 
+          if params[:user][:photo].present?
+            render :crop
+          else
+            redirect_to :home, notice: "Your profile is updated, #{@user.first_name}." 
+          end
+        }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -74,6 +87,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :username, :address, :city, :state, :zip, :photo, :password, :password_confirmation, :stripe_customer_token, :stripe_recipient_id, :first_name, :last_name, :phone)
+      params.require(:user).permit(:email, :username, :address, :city, :state, :zip, :photo, :password, :password_confirmation, :stripe_customer_token, :stripe_recipient_id, :first_name, :last_name, :phone, :crop_x, :crop_y, :crop_w, :crop_h)
     end
 end

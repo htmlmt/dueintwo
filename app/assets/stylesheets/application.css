@@ -13,4 +13,7 @@
  *= require_self
  *= require main
  *= require bootstrap-datepicker
+ *= require jquery.Jcrop
  */
+
+.jcrop img {max-width: none}

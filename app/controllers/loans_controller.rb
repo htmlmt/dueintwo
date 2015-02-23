@@ -29,21 +29,21 @@ class LoansController < ApplicationController
       :amount => @loan.item.price.to_i * 100,
       :currency => "usd",
       :customer => customer_id,
-      :description => "Due in Two: <%= @loan.item.name %> borrow from <%= @loan.loaner.username %>"
+      :description => "Due in Two: #{@loan.item.name} borrow from @#{@loan.loaner.username}."
     )
     
-    @owner_profit = (((@loan.item.price.to_i * 100) - 30) * 0.975).round
+    @owner_profit = (((@loan.item.price.to_i * 100) - 30) * 0.95).round
 
     Stripe::Transfer.create(
        :amount => @owner_profit,
        :currency => "usd",
        :recipient => @loan.loaner.stripe_recipient_id,
-       :description => "Due in Two: #{@loan.item.name} loan to #{@loan.borrower.username}"
+       :description => "Due in Two: #{@loan.item.name} loan to @#{@loan.borrower.username}."
     )
     
     respond_to do |format|  ## Add this
       if @loan.update(approved: true)
-        format.html { redirect_to "/", notice: 'Loan was successfully updated.' }
+        format.html { redirect_to "/", notice: 'Loan was approved.' }
         format.json { render :show, status: :ok, location: @loan }
       else
         format.html { redirect_to "/", notice: '#{@loan.errors}' }

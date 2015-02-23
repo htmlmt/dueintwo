@@ -73,21 +73,23 @@
 <% if @community_items != false %>
     <div class="nearby--listings">
         <div class="content">
+        <% if @community_items.count != 0 %>
         <div class="home--header">
-          <div class="home--header--left">
-              <div class="home--header--long">
-              </div>
-              <div class="home--header--short">
-              </div>
-          </div>
-          <h2>NEARBY LISTINGS</h2>
-          <div class="home--header--right">
-              <div class="home--header--long">
-              </div>
-              <div class="home--header--short">
-              </div>
-          </div>
+            <div class="home--header--left">
+                <div class="home--header--long">
+                </div>
+                <div class="home--header--short">
+                </div>
+            </div>
+            <h2>NEARBY LISTINGS</h2>
+            <div class="home--header--right">
+                <div class="home--header--long">
+                </div>
+                <div class="home--header--short">
+                </div>
+            </div>
         </div>
+        <% end %>
         <div class="items">
         <% @community_items.each do |item| %>
               <div class="item">
@@ -99,7 +101,7 @@
                   <div class="user--info index">
                       <%= link_to user_path(item.user) do %>
                           <div class="square">
-                              <div class="pic" style="background: url(<%= item.user.photo %>); background-size: 100%; background-position: center center; background-repeat: no-repeat;">
+                              <div class="pic" style="background: url(<%= item.user.photo.thumb %>); background-size: 100%; background-position: center center; background-repeat: no-repeat;">
                               </div>
                           </div>
                       <% end %>

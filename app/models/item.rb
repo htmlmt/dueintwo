@@ -1,6 +1,8 @@
 class Item < ActiveRecord::Base
   has_many :loans
+  has_many :photos
   belongs_to :user
+  mount_uploader :photo, ItemUploader
   
   extend FriendlyId
   friendly_id :name, use: :slugged

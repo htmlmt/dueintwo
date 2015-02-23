@@ -20,6 +20,10 @@ Rails.application.routes.draw do
   
   get 'search' => "items#search", :as => :search
   
+  get ':id' => "users#show", :as => :profile
+  
+  get ':id/edit' => "users#edit"
+  
   get 'last' => "home#last"
 
   # The priority is based upon order of creation: first created -> highest priority.

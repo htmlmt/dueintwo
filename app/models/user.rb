@@ -2,17 +2,19 @@ class User < ActiveRecord::Base
   has_many :items
   has_many :loans
   has_many :messages
+  mount_uploader :photo, PhotoUploader
+  after_update :crop_photo
+  
+  def crop_photo
+    photo.recreate_versions! if crop_x.present?
+  end
   
   extend FriendlyId
   friendly_id :username, use: :slugged
   
-  attr_accessor :stripe_card_token
+  attr_accessor :stripe_card_token, :crop_x, :crop_y, :crop_w, :crop_h
   
   authenticates_with_sorcery!
-  
-  validates :password, length: { minimum: 3 }
-  validates :password, confirmation: true
-  validates :password_confirmation, presence: true
 
   validates :email, uniqueness: true
   

@@ -10,11 +10,11 @@
 <ul class="results-list">
     <% @items.each do |item| %>
     <li class="result">
-        <a href="items/<%= item.id %>">
+        <%= link_to item do %>
             <section class="item--graphic"  style="background-image: url(<%= item.photo %>);">
             
             </section>
-        </a>
+        <% end %>
         <section class="item--content">
             <h1><%= link_to "#{item.name}", item %></h1>
             <section class="item--description" id="search--description">
@@ -23,7 +23,9 @@
             <section class="item--metadata">
                 <section class="item--renter">
                     <div class="square">
-                        <a href="users/<%= item.user.id %>"><div class="pic" style="background: url(<%= item.user.photo %>); background-size: 100%; background-position: center center; background-repeat: no-repeat;"></div></a>
+                        <%= link_to item.user do %>
+                        <div class="pic" style="background: url(<%= item.user.photo %>); background-size: 100%; background-position: center center; background-repeat: no-repeat;"></div>
+                        <% end %>
                     </div>
                     <span class="item--renter--name"><%= link_to "#{item.user.first_name}", item.user %></span>
                 </section>

@@ -37,7 +37,6 @@ class ItemsController < ApplicationController
         fulltext params[:search]
         
         without(:user_id, current_user.id)
-        with(:id, @community_items)
       end
       @items = @search.results
     else
@@ -73,8 +72,6 @@ class ItemsController < ApplicationController
       
       @search = Item.search do
         fulltext params[:search]
-        
-        with(:id, @community_items)
       end
       @items = @search.results
     end
@@ -110,9 +107,12 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
 
     respond_to do |format|
-      if @item.save_with_recipient
+      if @item.save
+        @item.save_with_recipient
         User.find(current_user.id).items << @item
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
+        format.html { 
+          redirect_to @item, notice: "#{@item.name} successfully created." 
+        }
         format.json { render :show, status: :created, location: @item }
       else
         format.html { render :new }
@@ -153,6 +153,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :description, :photo, :price, :user_id, :stripe_card_token)
+      params.require(:item).permit(:name, :description, :photo, :price, :user_id, :stripe_card_token, :crop_x, :crop_y, :crop_w, :crop_h)
     end
 end

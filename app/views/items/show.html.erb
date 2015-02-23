@@ -9,17 +9,19 @@
 
   <div class="user--info item--page">
     
-    <a href="/users/<%= @item.user.id %>">
+    <a href="/<%= @item.user.username %>">
       <div class="square" id="item--square">
-        <div class="pic" id="item--pic" style="background: url(<%= @item.user.photo %>); background-size: 100%">
+        <div class="pic" id="item--pic" style="background: url(<%= @item.user.photo.thumb %>); background-size: 100%">
         </div>
       </div>
     </a>
 
     <div class="username" id="username">
-      <%= link_to "#{@item.user.first_name}", @item.user %>
+        <a href="/<%= @item.user.username %>">
+            <%= @item.user.first_name %>
+        </a>
     </div>
-    <a href="/users/<%= @item.user.id %>">
+    <a href="/<%= @item.user.username %>">
       <div class="items--number">
         <% if @item.user.items.count == 1 %>
           1 ITEM
@@ -32,17 +34,120 @@
   </div>
   <% if current_user %>
   <div class="item--page--right--side">
-    <div class="pinpoint--container">
-      <div class="pinpoint">
-        <%= image_tag("pinpoint.png") %>
-      </div>
-      <% a = Geokit::Geocoders::GoogleGeocoder.geocode "#{current_user.address} #{current_user.city} #{current_user.state} #{current_user.zip}" %>
-      <% b = Geokit::Geocoders::GoogleGeocoder.geocode "#{@item.user.address} #{@item.user.city} #{@item.user.state} #{@item.user.zip}" %>
-      <div class="distance--away">
-        <%= a.distance_to(b).round(2) %> miles away
-      </div>
-    </div>
-    <div class="loan--request item--page">
+    <% if @item.loans != [] %>
+        <% loan = @item.loans.last %>
+        <% if current_user.id == loan.borrower_id && loan.approved != true %>
+            <div class="pinpoint--container">
+              <div class="pinpoint">
+                <%= image_tag("pinpoint.png") %>
+              </div>
+              <% a = Geokit::Geocoders::GoogleGeocoder.geocode "#{current_user.address} #{current_user.city} #{current_user.state} #{current_user.zip}" %>
+              <% b = Geokit::Geocoders::GoogleGeocoder.geocode "#{@item.user.address} #{@item.user.city} #{@item.user.state} #{@item.user.zip}" %>
+              <div class="distance--away">
+                <%= a.distance_to(b).round(2) %> miles away
+              </div>
+            </div>
+            <div class="actions">
+                <div id="borrow--this">Borrow Requested</div>
+            </div>
+        <% elsif current_user.id == loan.loaner_id && loan.approved != true %>
+            <div class="actions">
+                <a href="/loans/<%= loan.id %>/approve">
+                    <div id="borrow--this">Approve Loan</div>
+                </a>
+            </div>
+        <% elsif current_user.id == loan.borrower_id && loan.approved == true && loan.reserved_end > Time.now %>
+            <div class="pinpoint--container">
+              <div class="pinpoint">
+                <%= image_tag("pinpoint.png") %>
+              </div>
+              <% a = Geokit::Geocoders::GoogleGeocoder.geocode "#{current_user.address} #{current_user.city} #{current_user.state} #{current_user.zip}" %>
+              <% b = Geokit::Geocoders::GoogleGeocoder.geocode "#{@item.user.address} #{@item.user.city} #{@item.user.state} #{@item.user.zip}" %>
+              <div class="distance--away">
+                <%= a.distance_to(b).round(2) %> miles away
+              </div>
+            </div>
+        <% elsif current_user.id == loan.loaner_id && loan.approved == true && loan.reserved_end > Time.now %>
+        <% else  %>
+            <div class="pinpoint--container">
+              <div class="pinpoint">
+                <%= image_tag("pinpoint.png") %>
+              </div>
+              <% a = Geokit::Geocoders::GoogleGeocoder.geocode "#{current_user.address} #{current_user.city} #{current_user.state} #{current_user.zip}" %>
+              <% b = Geokit::Geocoders::GoogleGeocoder.geocode "#{@item.user.address} #{@item.user.city} #{@item.user.state} #{@item.user.zip}" %>
+              <div class="distance--away">
+                <%= a.distance_to(b).round(2) %> miles away
+              </div>
+            </div>
+            <div class="loan--request item--page">
+                <%= form_for(@loan) do |f| %>
+                    <% if @loan.errors.any? %>
+                        <div id="error_explanation">
+                            <h2>
+                              <%= pluralize(@loan.errors.count, "error") %> prohibited this loan from being saved:
+                            </h2>
+
+                            <ul>
+                                <% @loan.errors.full_messages.each do |message| %>
+                                    <li>
+                                      <%= message %>
+                                    </li>
+                                <% end %>
+                            </ul>
+                        </div>
+                    <% end %>
+
+                    <%= f.hidden_field :item_id, :value => @item.id %>
+                    <%= f.hidden_field :borrower_id, :value => current_user.id %>
+                    <%= f.hidden_field :loaner_id, :value => @item.user.id %>
+
+                    <% if current_user.stripe_customer_token.present? %>
+
+                        <p>You've already added a credit card.</p>
+
+                    <% else %>
+
+                        <%= f.hidden_field :stripe_card_token %>
+
+                        <%= f.hidden_field :email, :value => current_user.email, "data-stripe" => "email" %>
+
+                        <div class="field">
+                            <%= label_tag :card_number, "Credit Card Number" %><br/>
+                            <%= text_field_tag :card_number, nil, name: nil, "data-stripe" => "number" %>
+                        </div>
+                        <div class="field">
+                            <%= label_tag :card_code, "Security Code on Card (CVV)" %><br/>
+                            <%= text_field_tag :card_code, nil, name: nil, "data-stripe" => "cvc" %>
+                        </div>
+                        <div class="field">
+                            <%= label_tag :card_month, "Card Expiration" %><br/>
+                            <%= text_field_tag :card_month, nil, name: nil, "data-stripe" => "exp-month", class: "input-mini", "placeholder" => "MM" %>
+                            <%= text_field_tag :card_year, nil, name: nil, "data-stripe" => "exp-year", class: "input-mini", "placeholder" => "YYYY" %>
+                        </div>
+
+                    <% end %>
+
+                    <div class="field">
+                        <%= f.label "BORROW ON" %><br>
+                        <%= f.text_field :reserved_start, "class" => "datepicker" %>
+                    </div>
+
+                    <div class="field">
+                        BORROW FEE <span>$<%= '%.0f' % @item.price %></span>
+                    </div>
+                    <hr/>
+                    <div class="field">
+                        LATE FEE <span>$<%= '%.0f' % (@item.price/10) %>/DAY</span>
+                    </div>
+                    <hr/>
+                    <div class="actions">
+                        <%= f.submit "Borrow This", :id => "borrow--this" %>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+    <% else %>
+        <div class="loan--request item--page">
       <%= form_for(@loan) do |f| %>
         <% if @loan.errors.any? %>
           <div id="error_explanation">
@@ -63,17 +168,17 @@
         <%= f.hidden_field :item_id, :value => @item.id %>
         <%= f.hidden_field :borrower_id, :value => current_user.id %>
         <%= f.hidden_field :loaner_id, :value => @item.user.id %>
-  
+
         <% if current_user.stripe_customer_token.present? %>
-        
+
           <p>You've already added a credit card.</p>
-        
+
         <% else %>
-      
+
       <%= f.hidden_field :stripe_card_token %>
 
       <%= f.hidden_field :email, :value => current_user.email, "data-stripe" => "email" %>
-    
+
       <div class="field">
          <%= label_tag :card_number, "Credit Card Number" %><br/>
          <%= text_field_tag :card_number, nil, name: nil, "data-stripe" => "number" %>
@@ -87,14 +192,14 @@
           <%= text_field_tag :card_month, nil, name: nil, "data-stripe" => "exp-month", class: "input-mini", "placeholder" => "MM" %>
           <%= text_field_tag :card_year, nil, name: nil, "data-stripe" => "exp-year", class: "input-mini", "placeholder" => "YYYY" %>
       </div>
-     
+
        <% end %>
-    
+
         <div class="field">
             <%= f.label "BORROW ON" %><br>
-            <%= f.text_field :reserved_start, "data-provide" => "datepicker" %>
+            <%= f.text_field :reserved_start, "class" => "datepicker" %>
         </div>
-      
+
         <div class="field">
             BORROW FEE <span>$<%= '%.0f' % @item.price %></span>
         </div>
@@ -106,26 +211,27 @@
         <div class="actions">
             <%= f.submit "Borrow This", :id => "borrow--this" %>
         </div>
+    </div>
+    <% end %>
       
       <% end %>
-    </div>
     <div class="share--item">
         <h4>SHARE THIS</h4>
         <div class="social">
           <div class="facebook">
-            <a href="https://facebook.com/sharer.php?u=http://www.dueintwo.com/items/<%= @item.id %>">
+            <%= link_to "https://facebook.com/sharer.php?u=http%3A%2F%2Fwww.dueintwo.com#{item_path(@item)}", :target => "_blank" do %>
               <%= image_tag("social/facebook.png", :alt => "facebook}") %>
-            </a>
+            <% end %>
           </div>
           <div class="twitter">
-            <a href="https://twitter.com/intent/tweet?url=http://www.dueintwo.com/items/<%= @item.id %>&text=Want to borrow my <%= @item.name %>? Place a reservation here:&via=dueintwo">
+            <%= link_to "https://twitter.com/intent/tweet?url=http%3A%2F%2Fwww.dueintwo.com#{item_path(@item)}&text=I love this #{ @item.name }. You can borrow it here:&via=dueintwo", :target => "_blank" do %>
               <%= image_tag("social/twitter.png", :alt => "twitter}") %>
-            </a>
+            <% end %>
           </div>
           <div class="pinterest">
-            <a href="https://pinterest.com/pin/create/button/?url=http://www.dueintwo.com/items/<%= @item.id %>&media=<%= @item.photo %>&description=<%= @item.description %>">
+              <%= link_to "https://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.dueintwo.com#{item_path(@item)}&media=#{@item.photo}&description=#{@item.description}", :target => "_blank" do %>
               <%= image_tag("social/pinterest.png", :alt => "pinterest}") %>
-            </a>
+            <% end %>
           </div>
         </div>
     </div>
@@ -165,7 +271,7 @@
               <div class="user--info index">
                   <a href="users/<%= item.user.id %>">
                       <div class="square">
-                          <div class="pic" style="background: url(<%= item.user.photo %>); background-size: 100%; background-position: center center; background-repeat: no-repeat;">
+                          <div class="pic" style="background: url(<%= item.user.photo.thumb %>); background-size: 100%; background-position: center center; background-repeat: no-repeat;">
                           </div>
                       </div>
                   </a>
@@ -198,12 +304,14 @@
 
 <% item_loans = @item.loans %>
 <% borrow = false %>
-<% item_loans.each do |loan| %>
-  <% if loan.borrower_id == current_user.id && loan.approved == false %>
-    <% if loan.messages.present? == false %>
-      <% borrow = true %>
+<% if current_user %>
+    <% item_loans.each do |loan| %>
+      <% if loan.borrower_id == current_user.id && loan.approved == false %>
+        <% if loan.messages.present? == false %>
+          <% borrow = true %>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
 <% end %>
 
 <% if borrow == true %>
@@ -275,3 +383,49 @@
   </script>  
 <% end %>
 <% end %>
+
+<% if @item.loans %>
+<% reserved_dates = [] %>
+<% @item.loans.each do |loan| %>
+    <% if loan.reserved_end > Time.now %>
+        <% reserved_dates << (loan.reserved_start - 2).strftime("%F") %>
+        <% reserved_dates << (loan.reserved_start - 1).strftime("%F") %>
+        <% reserved_dates << loan.reserved_start.strftime("%F") %>
+        <% reserved_dates << (loan.reserved_start + 1).strftime("%F") %>
+        <% reserved_dates << loan.reserved_end.strftime("%F") %>
+    <% end %>
+<% end %>
+
+<script>
+    $(document).ready(function(){
+        var reserved = <%= reserved_dates.to_json.html_safe %>;
+        console.log(reserved)
+        var nowDate = new Date();
+        var today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);
+        
+        $('.datepicker').datepicker({
+            startDate: today,
+            beforeShowDay: function(date){
+               var formattedDate = $.fn.datepicker.DPGlobal.formatDate(date, 'yyyy-mm-dd', 'pl');
+               console.log(formattedDate);
+               if ($.inArray(formattedDate.toString(), reserved) != -1){
+                   return {
+                      enabled : false
+                   };
+               }
+              return;
+            }
+        });
+    });
+</script>
+<% end %>
+
+<style>
+.datepicker {
+    padding: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    direction: ltr;
+}
+</style>

@@ -51,6 +51,18 @@ gem 'geocoder'
 
 gem 'friendly_id'
 
+gem 'fog'
+
+gem 'dotenv-rails', :groups => [:development, :test]
+
+gem "rmagick"
+
+gem 'carrierwave'
+
+gem 'carrierwave-crop'
+
+gem 'delayed_job_active_record'
+
 gem 'pry'
 
 gem 'bootstrap-datepicker-rails'

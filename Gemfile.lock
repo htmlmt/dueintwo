@@ -43,6 +43,15 @@ GEM
     bootstrap-datepicker-rails (1.3.0.2)
       railties (>= 3.0)
     builder (3.2.2)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
+    carrierwave-crop (0.1.2)
+      carrierwave (>= 0.8.0, < 0.11.0)
+      jquery-rails
+      rails (>= 3.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -51,10 +60,37 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    delayed_job (4.0.6)
+      activesupport (>= 3.0, < 5.0)
+    delayed_job_active_record (4.0.3)
+      activerecord (>= 3.0, < 5.0)
+      delayed_job (>= 3.0, < 4.1)
+    dotenv (1.0.2)
+    dotenv-rails (1.0.2)
+      dotenv (= 1.0.2)
     erubis (2.7.0)
+    excon (0.32.1)
     execjs (2.2.2)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    fog (1.21.0)
+      fog-brightbox
+      fog-core (~> 1.21, >= 1.21.1)
+      fog-json
+      nokogiri (~> 1.5, >= 1.5.11)
+    fog-brightbox (0.0.1)
+      fog-core
+      fog-json
+    fog-core (1.21.1)
+      builder
+      excon (~> 0.32)
+      formatador (~> 0.2.0)
+      mime-types
+      net-scp (~> 1.1)
+      net-ssh (>= 2.1.3)
+    fog-json (1.0.0)
+      multi_json (~> 1.0)
+    formatador (0.2.4)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
     geocoder (1.2.7)
@@ -85,6 +121,9 @@ GEM
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    net-scp (1.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.8.0)
     netrc (0.8.0)
     nokogiri (1.6.4.1)
       mini_portile (~> 0.6.0)
@@ -135,6 +174,7 @@ GEM
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rmagick (2.13.4)
     rsolr (1.0.10)
       builder (>= 2.1.2)
     sass (3.2.19)
@@ -195,7 +235,12 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-datepicker-rails
+  carrierwave
+  carrierwave-crop
   coffee-rails (~> 4.0.0)
+  delayed_job_active_record
+  dotenv-rails
+  fog
   friendly_id
   geocoder
   geokit
@@ -207,6 +252,7 @@ DEPENDENCIES
   pry
   rails (= 4.1.6)
   rails_12factor
+  rmagick
   sass-rails (~> 4.0.3)
   sassquatch
   sdoc (~> 0.4.0)

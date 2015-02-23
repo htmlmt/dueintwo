@@ -13,8 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 //= require bootstrap-datepicker
+//= require jquery.Jcrop
+//= require_tree .
 
 $(document).ready(function(){
 	
